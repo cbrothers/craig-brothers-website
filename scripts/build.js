@@ -6,6 +6,7 @@ const DIST = path.join(ROOT, 'dist');
 
 const FILES_TO_COPY = [
   'index.html',
+  'styles.css',
   '404.html',
   'favicon.svg',
   'favicon.png',
