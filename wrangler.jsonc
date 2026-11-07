@@ -1,29 +1,42 @@
 {
-  "$schema": "node_modules/wrangler/config-schema.json",
   "name": "craig-brothers-website",
   "main": "functions/_middleware.js",
   "compatibility_date": "2026-04-01",
-  "workers_dev": false,
+  "keep_vars": true,
   "preview_urls": true,
   "routes": [
-    {
-      "pattern": "www.craigbrothers.com",
-      "custom_domain": true
-    },
-    {
-      "pattern": "craigbrothers.com",
-      "custom_domain": true
-    },
     {
       "pattern": "stage.craigbrothers.com",
       "custom_domain": true
     }
   ],
+  "build": {
+    "command": "npm run build"
+  },
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
     "not_found_handling": "404-page",
     "run_worker_first": true
+  },
+  "observability": {
+    "enabled": false,
+    "head_sampling_rate": 1,
+    "redact_query_string": false,
+    "logs": {
+      "enabled": true,
+      "head_sampling_rate": 1,
+      "invocation_logs": true,
+      "persist": true
+    },
+    "traces": {
+      "enabled": true,
+      "head_sampling_rate": 1,
+      "persist": true
+    },
+    "issues": {
+      "enabled": true
+    }
   },
   "kv_namespaces": [
     {
@@ -38,8 +51,5 @@
         "id": "8042e1b5ee4b42279489114046987cf6"
       }
     ]
-  },
-  "observability": {
-    "enabled": true
   }
 }

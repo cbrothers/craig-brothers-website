@@ -203,10 +203,10 @@ describe('5. Cloudflare Worker Edge Middleware, Redirects & GA4 Consent Mode v2'
     }
   });
 
-  it('configures Cloudflare Worker routes, KV binding, and security headers', () => {
-    assert.ok(wranglerJsonc.includes('www.craigbrothers.com'));
-    assert.ok(wranglerJsonc.includes('craigbrothers.com'));
+  it('configures Cloudflare Worker routes (stage.craigbrothers.com only pre-launch), KV binding, and security headers', () => {
     assert.ok(wranglerJsonc.includes('stage.craigbrothers.com'));
+    assert.equal(wranglerJsonc.includes('"www.craigbrothers.com"'), false, 'Production www route should not be in wrangler.jsonc before prod launch');
+    assert.equal(wranglerJsonc.includes('"craigbrothers.com"'), false, 'Production apex route should not be in wrangler.jsonc before prod launch');
     assert.ok(wranglerJsonc.includes('8042e1b5ee4b42279489114046987cf6'));
     assert.ok(middlewareJs.includes('/__health'));
     assert.ok(middlewareJs.includes('__cb_studio_override'));
@@ -274,3 +274,4 @@ describe('6. Worker Middleware Functional Simulation', () => {
     assert.equal(followUpRes.status, 403);
   });
 });
+
