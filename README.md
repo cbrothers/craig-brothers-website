@@ -23,6 +23,14 @@ npm test
 # Build static assets into ./dist
 npm run build
 
-# Verify live staging & production deployments
+# Verify Cloudflare Workers Builds check-runs on stage and main
 npm run verify:deploy
 ```
+
+## CI/CD Setup (Cloudflare Workers Builds)
+
+- **Repository**: `cbrothers/craig-brothers-website`
+- **Production branch**: `main` (`npm test` -> `npx wrangler deploy`)
+- **Preview branch (`stage`)**: Worker Previews (`npx wrangler preview` using `"previews"` bindings in `wrangler.jsonc`)
+- **Live Staging URL**: [https://stage.craigbrothers.com](https://stage.craigbrothers.com) (`www.craigbrothers.com` and `craigbrothers.com` remain on Google Sites until production cutover)
+
