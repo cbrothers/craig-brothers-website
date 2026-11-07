@@ -16,6 +16,7 @@ const middlewareJs = fs.readFileSync(path.join(ROOT, 'functions', '_middleware.j
 describe('1. Required Project Files & Build Artifacts', () => {
   const requiredFiles = [
     'index.html',
+    'styles.css',
     '404.html',
     'favicon.svg',
     'favicon.png',
@@ -43,6 +44,7 @@ describe('1. Required Project Files & Build Artifacts', () => {
 describe('2. Content Integrity & Zero-Emdash Enforcement', () => {
   const textFiles = [
     'index.html',
+    'styles.css',
     '404.html',
     '_headers',
     '_redirects',
