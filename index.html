@@ -37,6 +37,132 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-W8W15JLP5W');
+
+    // 3. Spotlight Stage + Filmstrip Dock Controller
+    document.querySelectorAll('[data-spotlight-deck]').forEach((deck) => {
+      const deckThumbs = Array.from(deck.querySelectorAll('.gallery-thumb'));
+      const mainImg = deck.querySelector('[data-spotlight-img]');
+      const stageEl = deck.querySelector('[data-spotlight-stage]');
+      const captionEl = deck.querySelector('[data-spotlight-caption]');
+      const counterEl = deck.querySelector('[data-spotlight-counter]');
+      const prevSlideBtn = deck.querySelector('[data-spotlight-prev]');
+      const nextSlideBtn = deck.querySelector('[data-spotlight-next]');
+      const playSlideBtn = deck.querySelector('[data-spotlight-play]');
+      const expandBtns = deck.querySelectorAll('[data-spotlight-expand]');
+      const filmstrip = deck.querySelector('.spotlight-filmstrip');
+
+      if (!deckThumbs.length || !mainImg) return;
+      let currentSlide = 0;
+      let autoplayTimer = null;
+
+      function selectSlide(idx, { scrollFilmstrip = true } = {}) {
+        currentSlide = (idx + deckThumbs.length) % deckThumbs.length;
+        const targetBtn = deckThumbs[currentSlide];
+        const src = targetBtn.getAttribute('data-lightbox-src');
+        const alt = targetBtn.getAttribute('data-lightbox-alt') || '';
+        const cap = targetBtn.getAttribute('data-lightbox-caption') || alt;
+        const thumbImg = targetBtn.querySelector('img');
+
+        mainImg.classList.add('is-transitioning');
+        setTimeout(() => {
+          if (src) {
+            mainImg.src = src;
+            if (stageEl) stageEl.style.setProperty('--stage-bg', "url('" + src + "')");
+          }
+          mainImg.alt = alt;
+          if (thumbImg) {
+            const w = thumbImg.getAttribute('width');
+            const h = thumbImg.getAttribute('height');
+            if (w) mainImg.setAttribute('width', w);
+            if (h) mainImg.setAttribute('height', h);
+          }
+          if (captionEl) captionEl.textContent = cap;
+          if (counterEl) {
+            counterEl.textContent =
+              String(currentSlide + 1).padStart(2, '0') +
+              ' / ' +
+              String(deckThumbs.length).padStart(2, '0');
+          }
+          mainImg.classList.remove('is-transitioning');
+        }, 110);
+
+        deckThumbs.forEach((b, i) => {
+          b.classList.toggle('is-active', i === currentSlide);
+        });
+
+        if (scrollFilmstrip && filmstrip) {
+          const stripRect = filmstrip.getBoundingClientRect();
+          const btnRect = targetBtn.getBoundingClientRect();
+          const offset = (btnRect.left - stripRect.left) - (stripRect.width / 2) + (btnRect.width / 2);
+          filmstrip.scrollBy({ left: offset, behavior: 'smooth' });
+        }
+      }
+
+      function stopAutoplay() {
+        if (autoplayTimer) {
+          clearInterval(autoplayTimer);
+          autoplayTimer = null;
+        }
+        if (playSlideBtn) {
+          playSlideBtn.setAttribute('aria-pressed', 'false');
+          playSlideBtn.innerHTML = '&#9654; Autoplay';
+        }
+      }
+
+      function toggleAutoplay() {
+        if (autoplayTimer) {
+          stopAutoplay();
+        } else {
+          if (playSlideBtn) {
+            playSlideBtn.setAttribute('aria-pressed', 'true');
+            playSlideBtn.innerHTML = '&#10074;&#10074; Pause';
+          }
+          autoplayTimer = setInterval(() => {
+            selectSlide(currentSlide + 1);
+          }, 3800);
+        }
+      }
+
+      // Clicking a thumbnail in a spotlight deck updates the spotlight stage
+      deckThumbs.forEach((btn, i) => {
+        btn.addEventListener('click', (event) => {
+          event.stopImmediatePropagation();
+          stopAutoplay();
+          selectSlide(i);
+        }, true);
+      });
+
+      if (prevSlideBtn) {
+        prevSlideBtn.addEventListener('click', () => {
+          stopAutoplay();
+          selectSlide(currentSlide - 1);
+        });
+      }
+
+      if (nextSlideBtn) {
+        nextSlideBtn.addEventListener('click', () => {
+          stopAutoplay();
+          selectSlide(currentSlide + 1);
+        });
+      }
+
+      if (playSlideBtn) {
+        playSlideBtn.addEventListener('click', toggleAutoplay);
+      }
+
+      expandBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          stopAutoplay();
+          const globalIdx = thumbs.indexOf(deckThumbs[currentSlide]);
+          if (globalIdx !== -1) {
+            showPhotoAt(globalIdx);
+            if (dialog && typeof dialog.showModal === 'function') {
+              dialog.showModal();
+            }
+          }
+        });
+      });
+    });
   </script>
 
   <!-- Structured Data -->
@@ -433,12 +559,33 @@
           </div>
         </div>
 
-        <div class="gallery-header">
-          <h3>Moments with Karry</h3>
-          <span class="gallery-hint">Click any photo to open full-screen</span>
-        </div>
-        <div class="photo-gallery" aria-label="Karry photo gallery">
-                      <button type="button" class="gallery-thumb" data-lightbox-src="/images/karry-01.jpg" data-lightbox-alt="Karry and Craig smiling together outdoors" data-lightbox-caption="Karry and Craig smiling together outdoors" data-lightbox-group="karry" aria-label="View full photo: Karry and Craig smiling together outdoors">
+        <div class="spotlight-deck" data-spotlight-deck="karry" aria-label="Karry photo gallery">
+          <div class="spotlight-topbar">
+            <div class="spotlight-title-wrap">
+              <h3>Moments with Karry</h3>
+              <span class="spotlight-counter" data-spotlight-counter>01 / 12</span>
+            </div>
+            <div class="spotlight-controls">
+              <button type="button" class="spotlight-btn" data-spotlight-prev aria-label="Previous slide in Moments with Karry">&larr; Prev</button>
+              <button type="button" class="spotlight-btn" data-spotlight-play aria-pressed="false" aria-label="Autoplay Moments with Karry slideshow">&#9654; Autoplay</button>
+              <button type="button" class="spotlight-btn" data-spotlight-next aria-label="Next slide in Moments with Karry">Next &rarr;</button>
+              <button type="button" class="spotlight-btn spotlight-expand-btn" data-spotlight-expand aria-label="Open current photo full-screen">&#x26F6; Fullscreen</button>
+            </div>
+          </div>
+
+          <div class="spotlight-stage" data-spotlight-stage style="--stage-bg: url('/images/karry-01.jpg');">
+            <button type="button" class="spotlight-stage-trigger" data-spotlight-expand aria-label="Click to view full-screen: Karry and Craig smiling together outdoors">
+              <img class="spotlight-main-img" data-spotlight-img src="/images/karry-01.jpg" alt="Karry and Craig smiling together outdoors" width="1200" height="2133" loading="lazy">
+            </button>
+            <div class="spotlight-caption-bar">
+              <p class="spotlight-caption" data-spotlight-caption>Karry and Craig smiling together outdoors</p>
+              <span class="spotlight-hint">Click photo for full-screen &middot; Scroll filmstrip below</span>
+            </div>
+          </div>
+
+          <div class="photo-gallery spotlight-filmstrip" role="region" aria-label="Karry photo gallery thumbnails">
+
+                      <button type="button" class="gallery-thumb is-active" data-lightbox-src="/images/karry-01.jpg" data-lightbox-alt="Karry and Craig smiling together outdoors" data-lightbox-caption="Karry and Craig smiling together outdoors" data-lightbox-group="karry" aria-label="View full photo: Karry and Craig smiling together outdoors">
               <img src="/images/karry-01.jpg" alt="Karry and Craig smiling together outdoors" width="1200" height="2133" loading="lazy">
             </button>
             <button type="button" class="gallery-thumb" data-lightbox-src="/images/karry-02.jpg" data-lightbox-alt="Sunset silhouettes and quiet farm moments with Karry" data-lightbox-caption="Sunset silhouettes and quiet farm moments with Karry" data-lightbox-group="karry" aria-label="View full photo: Sunset silhouettes and quiet farm moments with Karry">
@@ -474,6 +621,7 @@
             <button type="button" class="gallery-thumb" data-lightbox-src="/images/karry-12.jpg" data-lightbox-alt="Celebrating another chapter together" data-lightbox-caption="Celebrating another chapter together" data-lightbox-group="karry" aria-label="View full photo: Celebrating another chapter together">
               <img src="/images/karry-12.jpg" alt="Celebrating another chapter together" width="1200" height="1600" loading="lazy">
             </button>
+                  </div>
         </div>
 
         <div class="craft-panel">
@@ -589,12 +737,33 @@
           </article>
         </div>
 
-        <div class="gallery-header">
-          <h3>Freya Photo Gallery (24 Photos)</h3>
-          <span class="gallery-hint">Click any photo to open full-screen</span>
-        </div>
-        <div class="photo-gallery" aria-label="Freya photo gallery">
-                      <button type="button" class="gallery-thumb" data-lightbox-src="/images/freya-01.jpg" data-lightbox-alt="Freya on alert in the yard at Stephentown" data-lightbox-caption="Freya on alert in the yard at Stephentown" data-lightbox-group="freya" aria-label="View full photo: Freya on alert in the yard at Stephentown">
+        <div class="spotlight-deck" data-spotlight-deck="freya" aria-label="Freya photo gallery">
+          <div class="spotlight-topbar">
+            <div class="spotlight-title-wrap">
+              <h3>Freya Photo Gallery (24 Photos)</h3>
+              <span class="spotlight-counter" data-spotlight-counter>01 / 24</span>
+            </div>
+            <div class="spotlight-controls">
+              <button type="button" class="spotlight-btn" data-spotlight-prev aria-label="Previous slide in Freya Photo Gallery (24 Photos)">&larr; Prev</button>
+              <button type="button" class="spotlight-btn" data-spotlight-play aria-pressed="false" aria-label="Autoplay Freya Photo Gallery (24 Photos) slideshow">&#9654; Autoplay</button>
+              <button type="button" class="spotlight-btn" data-spotlight-next aria-label="Next slide in Freya Photo Gallery (24 Photos)">Next &rarr;</button>
+              <button type="button" class="spotlight-btn spotlight-expand-btn" data-spotlight-expand aria-label="Open current photo full-screen">&#x26F6; Fullscreen</button>
+            </div>
+          </div>
+
+          <div class="spotlight-stage" data-spotlight-stage style="--stage-bg: url('/images/freya-01.jpg');">
+            <button type="button" class="spotlight-stage-trigger" data-spotlight-expand aria-label="Click to view full-screen: Freya on alert in the yard at Stephentown">
+              <img class="spotlight-main-img" data-spotlight-img src="/images/freya-01.jpg" alt="Freya on alert in the yard at Stephentown" width="1200" height="1538" loading="lazy">
+            </button>
+            <div class="spotlight-caption-bar">
+              <p class="spotlight-caption" data-spotlight-caption>Freya on alert in the yard at Stephentown</p>
+              <span class="spotlight-hint">Click photo for full-screen &middot; Scroll filmstrip below</span>
+            </div>
+          </div>
+
+          <div class="photo-gallery spotlight-filmstrip" role="region" aria-label="Freya photo gallery thumbnails">
+
+                      <button type="button" class="gallery-thumb is-active" data-lightbox-src="/images/freya-01.jpg" data-lightbox-alt="Freya on alert in the yard at Stephentown" data-lightbox-caption="Freya on alert in the yard at Stephentown" data-lightbox-group="freya" aria-label="View full photo: Freya on alert in the yard at Stephentown">
               <img src="/images/freya-01.jpg" alt="Freya on alert in the yard at Stephentown" width="1200" height="1538" loading="lazy">
             </button>
             <button type="button" class="gallery-thumb" data-lightbox-src="/images/freya-02.jpg" data-lightbox-alt="Freya relaxing indoors after a full sprint" data-lightbox-caption="Freya relaxing indoors after a full sprint" data-lightbox-group="freya" aria-label="View full photo: Freya relaxing indoors after a full sprint">
@@ -666,6 +835,7 @@
             <button type="button" class="gallery-thumb" data-lightbox-src="/images/freya-24.jpg" data-lightbox-alt="Freya settled in at home" data-lightbox-caption="Freya settled in at home" data-lightbox-group="freya" aria-label="View full photo: Freya settled in at home">
               <img src="/images/freya-24.jpg" alt="Freya settled in at home" width="1200" height="904" loading="lazy">
             </button>
+                  </div>
         </div>
       </div>
     </section>
@@ -699,12 +869,33 @@
           </div>
         </div>
 
-        <div class="gallery-header">
-          <h3>Kora Photo Gallery (25 Photos)</h3>
-          <span class="gallery-hint">Click any photo to open full-screen</span>
-        </div>
-        <div class="photo-gallery" aria-label="Kora photo gallery">
-                      <button type="button" class="gallery-thumb" data-lightbox-src="/images/kora-01.jpg" data-lightbox-alt="Kora feature portrait at home" data-lightbox-caption="Kora feature portrait at home" data-lightbox-group="kora" aria-label="View full photo: Kora feature portrait at home">
+        <div class="spotlight-deck" data-spotlight-deck="kora" aria-label="Kora photo gallery">
+          <div class="spotlight-topbar">
+            <div class="spotlight-title-wrap">
+              <h3>Kora Photo Gallery (25 Photos)</h3>
+              <span class="spotlight-counter" data-spotlight-counter>01 / 25</span>
+            </div>
+            <div class="spotlight-controls">
+              <button type="button" class="spotlight-btn" data-spotlight-prev aria-label="Previous slide in Kora Photo Gallery (25 Photos)">&larr; Prev</button>
+              <button type="button" class="spotlight-btn" data-spotlight-play aria-pressed="false" aria-label="Autoplay Kora Photo Gallery (25 Photos) slideshow">&#9654; Autoplay</button>
+              <button type="button" class="spotlight-btn" data-spotlight-next aria-label="Next slide in Kora Photo Gallery (25 Photos)">Next &rarr;</button>
+              <button type="button" class="spotlight-btn spotlight-expand-btn" data-spotlight-expand aria-label="Open current photo full-screen">&#x26F6; Fullscreen</button>
+            </div>
+          </div>
+
+          <div class="spotlight-stage" data-spotlight-stage style="--stage-bg: url('/images/kora-01.jpg');">
+            <button type="button" class="spotlight-stage-trigger" data-spotlight-expand aria-label="Click to view full-screen: Kora feature portrait at home">
+              <img class="spotlight-main-img" data-spotlight-img src="/images/kora-01.jpg" alt="Kora feature portrait at home" width="1200" height="812" loading="lazy">
+            </button>
+            <div class="spotlight-caption-bar">
+              <p class="spotlight-caption" data-spotlight-caption>Kora feature portrait at home</p>
+              <span class="spotlight-hint">Click photo for full-screen &middot; Scroll filmstrip below</span>
+            </div>
+          </div>
+
+          <div class="photo-gallery spotlight-filmstrip" role="region" aria-label="Kora photo gallery thumbnails">
+
+                      <button type="button" class="gallery-thumb is-active" data-lightbox-src="/images/kora-01.jpg" data-lightbox-alt="Kora feature portrait at home" data-lightbox-caption="Kora feature portrait at home" data-lightbox-group="kora" aria-label="View full photo: Kora feature portrait at home">
               <img src="/images/kora-01.jpg" alt="Kora feature portrait at home" width="1200" height="812" loading="lazy">
             </button>
                       <button type="button" class="gallery-thumb" data-lightbox-src="/images/kora-02.jpg" data-lightbox-alt="Kora keeping watch from the back of the recliner" data-lightbox-caption="Kora keeping watch from the back of the recliner" data-lightbox-group="kora" aria-label="View full photo: Kora keeping watch from the back of the recliner">
@@ -779,6 +970,7 @@
             <button type="button" class="gallery-thumb" data-lightbox-src="/images/kora-25.jpg" data-lightbox-alt="Curled up contentedly at home" data-lightbox-caption="Curled up contentedly at home" data-lightbox-group="kora" aria-label="View full photo: Curled up contentedly at home">
               <img src="/images/kora-25.jpg" alt="Curled up contentedly at home" width="1200" height="904" loading="lazy">
             </button>
+                  </div>
         </div>
       </div>
     </section>
@@ -812,12 +1004,33 @@
           </div>
         </div>
 
-        <div class="gallery-header">
-          <h3>Gus Photo Gallery (10 Photos)</h3>
-          <span class="gallery-hint">Click any photo to open full-screen</span>
-        </div>
-        <div class="photo-gallery" aria-label="Gus photo gallery">
-                      <button type="button" class="gallery-thumb" data-lightbox-src="/images/gus-01.jpg" data-lightbox-alt="Caesar Augustus (Gus) looking regal in the bridle" data-lightbox-caption="Caesar Augustus (Gus) looking regal in the bridle" data-lightbox-group="gus" aria-label="View full photo: Caesar Augustus (Gus) looking regal in the bridle">
+        <div class="spotlight-deck" data-spotlight-deck="gus" aria-label="Gus photo gallery">
+          <div class="spotlight-topbar">
+            <div class="spotlight-title-wrap">
+              <h3>Gus Photo Gallery (10 Photos)</h3>
+              <span class="spotlight-counter" data-spotlight-counter>01 / 10</span>
+            </div>
+            <div class="spotlight-controls">
+              <button type="button" class="spotlight-btn" data-spotlight-prev aria-label="Previous slide in Gus Photo Gallery (10 Photos)">&larr; Prev</button>
+              <button type="button" class="spotlight-btn" data-spotlight-play aria-pressed="false" aria-label="Autoplay Gus Photo Gallery (10 Photos) slideshow">&#9654; Autoplay</button>
+              <button type="button" class="spotlight-btn" data-spotlight-next aria-label="Next slide in Gus Photo Gallery (10 Photos)">Next &rarr;</button>
+              <button type="button" class="spotlight-btn spotlight-expand-btn" data-spotlight-expand aria-label="Open current photo full-screen">&#x26F6; Fullscreen</button>
+            </div>
+          </div>
+
+          <div class="spotlight-stage" data-spotlight-stage style="--stage-bg: url('/images/gus-01.jpg');">
+            <button type="button" class="spotlight-stage-trigger" data-spotlight-expand aria-label="Click to view full-screen: Caesar Augustus (Gus) looking regal in the bridle">
+              <img class="spotlight-main-img" data-spotlight-img src="/images/gus-01.jpg" alt="Caesar Augustus (Gus) looking regal in the bridle" width="1200" height="1600" loading="lazy">
+            </button>
+            <div class="spotlight-caption-bar">
+              <p class="spotlight-caption" data-spotlight-caption>Caesar Augustus (Gus) looking regal in the bridle</p>
+              <span class="spotlight-hint">Click photo for full-screen &middot; Scroll filmstrip below</span>
+            </div>
+          </div>
+
+          <div class="photo-gallery spotlight-filmstrip" role="region" aria-label="Gus photo gallery thumbnails">
+
+                      <button type="button" class="gallery-thumb is-active" data-lightbox-src="/images/gus-01.jpg" data-lightbox-alt="Caesar Augustus (Gus) looking regal in the bridle" data-lightbox-caption="Caesar Augustus (Gus) looking regal in the bridle" data-lightbox-group="gus" aria-label="View full photo: Caesar Augustus (Gus) looking regal in the bridle">
               <img src="/images/gus-01.jpg" alt="Caesar Augustus (Gus) looking regal in the bridle" width="1200" height="1600" loading="lazy">
             </button>
             <button type="button" class="gallery-thumb" data-lightbox-src="/images/gus-02.jpg" data-lightbox-alt="Gus enjoying western dressage out in the ring" data-lightbox-caption="Gus enjoying western dressage out in the ring" data-lightbox-group="gus" aria-label="View full photo: Gus enjoying western dressage out in the ring">
@@ -847,6 +1060,7 @@
             <button type="button" class="gallery-thumb" data-lightbox-src="/images/gus-10.jpg" data-lightbox-alt="Gus relaxing in the paddock with herd friends" data-lightbox-caption="Gus relaxing in the paddock with herd friends" data-lightbox-group="gus" aria-label="View full photo: Gus relaxing in the paddock with herd friends">
               <img src="/images/gus-10.jpg" alt="Gus relaxing in the paddock with herd friends" width="1200" height="900" loading="lazy">
             </button>
+                  </div>
         </div>
       </div>
     </section>
