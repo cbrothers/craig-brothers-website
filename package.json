@@ -1,0 +1,16 @@
+{
+  "name": "craig-brothers-website",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Personal website for Craig Brothers (www.craigbrothers.com) - Cloudflare Workers + Static Assets",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "test": "node --test tests/site-integrity.test.js",
+    "deploy": "wrangler deploy",
+    "verify:deploy": "node scripts/verify-deploy.js"
+  },
+  "devDependencies": {
+    "wrangler": "^4.77.0"
+  }
+}

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Craig Brothers Monogram">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b1120"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#bg)"/>
+  <rect x="2" y="2" width="60" height="60" rx="12" fill="none" stroke="url(#accent)" stroke-width="2" stroke-opacity="0.65"/>
+  <path d="M27 20h-6a7 7 0 0 0-7 7v10a7 7 0 0 0 7 7h6" fill="none" stroke="#38bdf8" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="M35 20v24h9a6 6 0 0 0 0-12h-9m9 0a6 6 0 0 0 0-12h-9" fill="none" stroke="#f8fafc" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

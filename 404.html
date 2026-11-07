@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404: Packet Dropped in the Paddock | Craig Brothers</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0b1120">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-deep: #0b1120;
+      --bg-card: #131c31;
+      --bg-surface: #1e293b;
+      --text-primary: #f8fafc;
+      --text-secondary: #cbd5e1;
+      --text-muted: #94a3b8;
+      --accent-cyan: #38bdf8;
+      --accent-amber: #f59e0b;
+      --border-subtle: rgba(148, 163, 184, 0.18);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-deep);
+      background-image:
+        radial-gradient(circle at 18% 20%, rgba(56, 189, 248, 0.12), transparent 40%),
+        radial-gradient(circle at 82% 80%, rgba(245, 158, 11, 0.1), transparent 40%);
+      color: var(--text-primary);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      line-height: 1.6;
+    }
+
+    header {
+      padding: 1.25rem 2rem;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text-primary);
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+    }
+
+    .brand img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1.5px solid var(--accent-cyan);
+    }
+
+    main {
+      max-width: 780px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+      text-align: center;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: var(--accent-cyan);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      margin-bottom: 1.25rem;
+    }
+
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+
+    .lead {
+      color: var(--text-secondary);
+      font-size: 1.08rem;
+      max-width: 620px;
+      margin: 0 auto 2rem;
+    }
+
+    .excuse-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      text-align: left;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+    }
+
+    .excuse-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .excuse-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--accent-amber);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .excuse-btn {
+      background: var(--bg-surface);
+      color: var(--text-primary);
+      border: 1px solid var(--border-subtle);
+      border-radius: 0.5rem;
+      padding: 0.4rem 0.85rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+
+    .excuse-btn:hover {
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+    }
+
+    .excuse-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+    }
+
+    .nav-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.35rem;
+      border-radius: 0.6rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: transform 0.15s ease, border-color 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--accent-cyan);
+      color: #08101d;
+    }
+
+    .btn-secondary {
+      background: var(--bg-card);
+      color: var(--text-primary);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    footer {
+      padding: 1.5rem;
+      text-align: center;
+      border-top: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="/" class="brand">
+      <img src="/images/logo.png" alt="Craig Brothers profile photo" width="36" height="36" fetchpriority="high">
+      <span>Craig Brothers</span>
+    </a>
+  </header>
+
+  <main>
+    <div class="status-pill">HTTP 404 :: ROUTE_NOT_IN_PADDOCK</div>
+    <h1>Packet Dropped in the Paddock</h1>
+    <p class="lead">
+      Looked across the Proxmox cluster, checked the barn Wi-Fi mesh, and asked the dogs, but the page you requested isn't here.
+    </p>
+
+    <section class="excuse-card" aria-labelledby="diagnosticHeading">
+      <div class="excuse-header">
+        <h2 id="diagnosticHeading" class="excuse-label">Telemetry Diagnostic Log</h2>
+        <button type="button" id="cycleExcuseBtn" class="excuse-btn">Run Another Diagnostic</button>
+      </div>
+      <p id="excuseOutput" class="excuse-text">
+        [WARN] Freya mistook the fiber patch cable for a tug toy while chasing birds across Stephentown.
+      </p>
+    </section>
+
+    <nav class="nav-grid" aria-label="Recovery navigation">
+      <a href="/" class="btn btn-primary">Return Home</a>
+      <a href="/#me" class="btn btn-secondary">About Craig</a>
+      <a href="/#engineering" class="btn btn-secondary">Engineering</a>
+      <a href="/#music" class="btn btn-secondary">Music Projects</a>
+      <a href="/#karry" class="btn btn-secondary">Karry</a>
+      <a href="/#freya" class="btn btn-secondary">Freya</a>
+      <a href="/#kora" class="btn btn-secondary">Kora</a>
+      <a href="/#gus" class="btn btn-secondary">Gus</a>
+    </nav>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Craig Brothers &middot; Stephentown, NY</p>
+  </footer>
+
+  <script>
+    const excuses = [
+      '[WARN] Freya mistook the fiber patch cable for a tug toy while chasing birds across Stephentown.',
+      '[INFO] Kora is currently asleep between Craig\'s knees absorbing laptop heat; keyboard movement restricted.',
+      '[ERR_BALE_FROZEN] System administrator is outside wrestling a frozen round bale in -20F wind chill.',
+      '[HORSE_OVERRIDE] Gus ("The Babysitter") reviewed your URL request and decided he prefers western dressage instead.',
+      '[AUDIO_BUSY] Studio bus is locked rendering a 100% Carbon / 50% Silicon mix for Artificial Integrity.'
+    ];
+    let idx = 0;
+    const btn = document.getElementById('cycleExcuseBtn');
+    const out = document.getElementById('excuseOutput');
+    if (btn && out) {
+      btn.addEventListener('click', () => {
+        idx = (idx + 1) % excuses.length;
+        out.textContent = excuses[idx];
+      });
+    }
+  </script>
+</body>
+</html>

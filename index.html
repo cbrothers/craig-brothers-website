@@ -1,0 +1,2055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Craig Brothers | Systems Engineer, Musician &amp; Builder in Stephentown, NY</title>
+  <meta name="description" content="Personal hub of Craig Brothers in Stephentown, NY: IT Systems Engineer, homelab architect, AI music creator (Artificial Integrity, The Silent Whistle, Brothers Blues), and co-steward of Emerald Glen Equestrian Center with Karry, Freya, Kora, and Gus.">
+  <link rel="canonical" href="https://www.craigbrothers.com/">
+  <meta name="theme-color" content="#0b1120">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Craig Brothers">
+  <meta property="og:title" content="Craig Brothers | Engineer, Musician &amp; Wannabe Farmer">
+  <meta property="og:description" content="Systems engineering, AI-assisted sonic architecture, farm telemetry, and life at Emerald Glen in Stephentown, NY with Karry, Freya, Kora, and Gus.">
+  <meta property="og:url" content="https://www.craigbrothers.com/">
+  <meta property="og:image" content="https://www.craigbrothers.com/images/banner-me.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Craig Brothers | Engineer, Musician &amp; Wannabe Farmer">
+  <meta name="twitter:description" content="Systems engineering, AI-assisted sonic architecture, farm telemetry, and life at Emerald Glen in Stephentown, NY.">
+  <meta name="twitter:image" content="https://www.craigbrothers.com/images/banner-me.jpg">
+
+  <!-- Icons -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+
+  <!-- Google Analytics 4 with Consent Mode v2 (Default Denied until user consent) -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied',
+      wait_for_update: 500
+    });
+    window.GA_MEASUREMENT_ID = 'G-W8W15JLP5W';
+  </script>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "url": "https://www.craigbrothers.com/",
+    "name": "Craig Brothers - Systems Engineer, Musician & Pet Dad",
+    "mainEntity": {
+      "@type": "Person",
+      "name": "Craig Brothers",
+      "jobTitle": "IT Systems Engineer & Musician",
+      "url": "https://www.craigbrothers.com/",
+      "image": "https://www.craigbrothers.com/images/banner-me.jpg",
+      "homeLocation": {
+        "@type": "Place",
+        "name": "Stephentown, NY"
+      },
+      "spouse": {
+        "@type": "Person",
+        "name": "Karry Brothers"
+      },
+      "sameAs": [
+        "https://www.artificialintegritymusic.com",
+        "https://www.thesilentwhistleband.com",
+        "https://www.brothersblues.com",
+        "https://www.emerald-glen.com"
+      ]
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg-deep: #070b14;
+      --bg-primary: #0b1120;
+      --bg-elevated: #111a2e;
+      --bg-card: #152038;
+      --bg-card-hover: #1b2948;
+      --text-primary: #f8fafc;
+      --text-secondary: #cbd5e1;
+      --text-muted: #94a3b8;
+      --accent-cyan: #38bdf8;
+      --accent-amber: #f59e0b;
+      --accent-emerald: #10b981;
+      --accent-rose: #fb7185;
+      --border-subtle: rgba(148, 163, 184, 0.16);
+      --border-glow: rgba(56, 189, 248, 0.42);
+      --radius-sm: 0.5rem;
+      --radius-md: 0.85rem;
+      --radius-lg: 1.25rem;
+      --max-w: 1220px;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 5rem;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-deep);
+      color: var(--text-primary);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    a:hover {
+      color: #7dd3fc;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      left: 1rem;
+      background: var(--accent-cyan);
+      color: #070b14;
+      padding: 0.6rem 1rem;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      z-index: 1000;
+      transition: top 0.2s ease;
+    }
+
+    .skip-link:focus {
+      top: 1rem;
+    }
+
+    /* Sticky Top Navigation */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7, 11, 20, 0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .header-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0.85rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--text-primary);
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+    }
+
+    .brand img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--accent-cyan);
+    }
+
+    .brand-meta {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.15;
+    }
+
+    .brand-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .nav-toggle {
+      display: none;
+      background: var(--bg-card);
+      color: var(--text-primary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 0.45rem 0.75rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      cursor: pointer;
+    }
+
+    .site-nav ul {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      flex-wrap: wrap;
+    }
+
+    .site-nav a {
+      display: inline-block;
+      padding: 0.42rem 0.78rem;
+      border-radius: var(--radius-sm);
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .site-nav a:hover,
+    .site-nav a:focus-visible {
+      background: rgba(56, 189, 248, 0.12);
+      color: var(--text-primary);
+    }
+
+    /* Section Containers */
+    .section {
+      padding: 5rem 1.5rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .section-alt {
+      background-color: var(--bg-primary);
+    }
+
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-cyan);
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.28);
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      margin-bottom: 0.9rem;
+    }
+
+    .section-header {
+      margin-bottom: 2.75rem;
+      max-width: 780px;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+
+    h2 {
+      font-size: clamp(1.85rem, 3.5vw, 2.65rem);
+      line-height: 1.18;
+      margin-bottom: 0.65rem;
+    }
+
+    .section-subtitle {
+      color: var(--text-secondary);
+      font-size: 1.06rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 4.5rem 1.5rem 5rem;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(56, 189, 248, 0.15), transparent 42%),
+        radial-gradient(circle at 88% 75%, rgba(245, 158, 11, 0.12), transparent 45%),
+        linear-gradient(180deg, #070b14 0%, #0b1120 100%);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .hero-grid {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.25fr 0.95fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.25rem, 4.8vw, 3.7rem);
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .hero-quote {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.92rem;
+      color: var(--accent-amber);
+      background: rgba(245, 158, 11, 0.09);
+      border-left: 3px solid var(--accent-amber);
+      padding: 0.65rem 1rem;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-lead {
+      color: var(--text-secondary);
+      font-size: 1.08rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      margin-bottom: 2rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.35rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.94rem;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--accent-cyan);
+      color: #070b14;
+    }
+
+    .btn-primary:hover {
+      color: #070b14;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(56, 189, 248, 0.28);
+    }
+
+    .btn-outline {
+      background: var(--bg-card);
+      color: var(--text-primary);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .btn-outline:hover {
+      color: var(--accent-cyan);
+      border-color: var(--accent-cyan);
+      transform: translateY(-2px);
+    }
+
+    .hero-portrait-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1rem;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+      position: relative;
+    }
+
+    .hero-portrait-card > img {
+      width: 100%;
+      aspect-ratio: 4 / 4.8;
+      object-fit: cover;
+      border-radius: var(--radius-md);
+    }
+
+    .hero-badge-bar {
+      margin-top: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 0.65rem 0.85rem;
+      background: var(--bg-elevated);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .hero-badge-bar img {
+      width: 56px;
+      height: 44px;
+      object-fit: contain;
+      border-radius: 0.35rem;
+    }
+
+    .hero-badge-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+    }
+
+    /* Quick Jump Cards ("Some of the things that are important to me...") */
+    .important-strip {
+      margin-top: 3.5rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .important-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.25rem;
+      margin-bottom: 1.25rem;
+      color: var(--text-primary);
+    }
+
+    .important-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+    }
+
+    .important-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      color: var(--text-primary);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .important-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-cyan);
+      color: var(--text-primary);
+    }
+
+    .important-card img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+    }
+
+    .important-card-body {
+      padding: 0.9rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .important-card-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+
+    .important-card-role {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--accent-cyan);
+    }
+
+    /* Three Pillars Bar (What I do / Where I am / Quick Specs) */
+    .pillars-grid {
+      margin-top: 2rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+
+    .pillar-box {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.35rem 1.5rem;
+    }
+
+    .pillar-box h3 {
+      font-size: 1.05rem;
+      margin-bottom: 0.65rem;
+      color: var(--accent-cyan);
+    }
+
+    .pillar-box ul {
+      list-style: none;
+      display: grid;
+      gap: 0.4rem;
+      color: var(--text-secondary);
+      font-size: 0.94rem;
+    }
+
+    /* About Me Section */
+    .bio-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 2.25rem;
+      align-items: start;
+    }
+
+    .prose p {
+      color: var(--text-secondary);
+      margin-bottom: 1.1rem;
+      font-size: 1.02rem;
+    }
+
+    .resilience-card {
+      background: linear-gradient(145deg, rgba(21, 32, 56, 0.95), rgba(15, 23, 42, 0.95));
+      border: 1px solid rgba(16, 185, 129, 0.32);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+    }
+
+    .resilience-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.75rem;
+      color: #34d399;
+    }
+
+    .resilience-card p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .tldr-callout {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.83rem;
+      background: rgba(16, 185, 129, 0.1);
+      border-left: 3px solid var(--accent-emerald);
+      padding: 0.65rem 0.9rem;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      color: var(--text-primary);
+    }
+
+    .me-photo-row {
+      margin-top: 2rem;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+
+    /* Feature Cards Grid (Engineering & Music) */
+    .cards-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .feature-card:hover {
+      border-color: var(--border-glow);
+      transform: translateY(-3px);
+    }
+
+    .feature-tag {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      color: var(--accent-amber);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.6rem;
+    }
+
+    .feature-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.65rem;
+    }
+
+    .feature-card p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .spec-list {
+      list-style: none;
+      display: grid;
+      gap: 0.4rem;
+      margin-bottom: 1.25rem;
+      padding-top: 0.85rem;
+      border-top: 1px solid var(--border-subtle);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .card-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: auto;
+    }
+
+    .chip-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: var(--radius-sm);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .chip-link:hover {
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+    }
+
+    /* Story + Banner Layout for Karry, Freya, Kora, Gus */
+    .story-banner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.25rem;
+      align-items: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .story-banner-img {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-card);
+    }
+
+    .story-banner-img img {
+      width: 100%;
+      max-height: 440px;
+      object-fit: cover;
+    }
+
+    /* Craft Showcase (Karry's Tree of Life Horse Shoes) */
+    .craft-panel {
+      margin-top: 2.5rem;
+      background: var(--bg-card);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+    }
+
+    .craft-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .craft-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    /* Embark DNA Breakdown Bars */
+    .dna-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .dna-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .dna-bars {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .dna-row-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.88rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .dna-track {
+      height: 10px;
+      background: var(--bg-deep);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .dna-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-amber));
+      width: var(--dna-pct, 50%);
+    }
+
+    /* Highlight Trio Cards (Freya) */
+    .highlight-trio {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-bottom: 2.25rem;
+    }
+
+    .highlight-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .highlight-item img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+
+    .highlight-item-body {
+      padding: 1.1rem;
+    }
+
+    .highlight-item-body h3 {
+      font-size: 1.08rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .highlight-item-body p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    /* Interactive Photo Gallery Grid */
+    .gallery-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .gallery-hint {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .photo-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));
+      gap: 0.85rem;
+    }
+
+    .gallery-thumb {
+      appearance: none;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 0;
+      overflow: hidden;
+      cursor: pointer;
+      aspect-ratio: 4 / 3;
+      position: relative;
+      transition: transform 0.18s ease, border-color 0.2s ease;
+    }
+
+    .gallery-thumb:hover,
+    .gallery-thumb:focus-visible {
+      transform: scale(1.02);
+      border-color: var(--accent-cyan);
+    }
+
+    .gallery-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Local Friends Section */
+    .friends-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.15rem;
+    }
+
+    .friend-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.35rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 0.65rem;
+      color: var(--text-primary);
+      transition: border-color 0.2s ease, transform 0.18s ease;
+    }
+
+    .friend-card:hover {
+      border-color: var(--accent-cyan);
+      transform: translateY(-3px);
+    }
+
+    .friend-card h3 {
+      font-size: 1.08rem;
+    }
+
+    .friend-card p {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+    }
+
+    .friend-url {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.76rem;
+      color: var(--accent-cyan);
+    }
+
+    /* Lightbox Dialog */
+    dialog#lightboxDialog {
+      margin: auto;
+      max-width: min(94vw, 1080px);
+      max-height: 92vh;
+      width: 100%;
+      background: var(--bg-elevated);
+      color: var(--text-primary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.75);
+    }
+
+    dialog#lightboxDialog::backdrop {
+      background-color: rgba(4, 8, 16, 0.84);
+      backdrop-filter: blur(5px);
+    }
+
+    .lightbox-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .lightbox-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .lightbox-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .lightbox-btn {
+      background: var(--bg-card);
+      color: var(--text-primary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 0.4rem 0.75rem;
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .lightbox-btn:hover {
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+    }
+
+    .lightbox-stage {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #050811;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      max-height: 75vh;
+    }
+
+    .lightbox-stage img {
+      max-height: 74vh;
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
+    }
+
+    /* Footer */
+    .site-footer {
+      padding: 3rem 1.5rem;
+      background: #050811;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+    }
+
+    .footer-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .link-btn {
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 0.88rem;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    /* Cookie Consent Banner */
+    .cookie-banner {
+      position: fixed;
+      bottom: 1.25rem;
+      right: 1.25rem;
+      left: 1.25rem;
+      max-width: 520px;
+      margin-left: auto;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.15rem 1.35rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65);
+      z-index: 200;
+    }
+
+    .cookie-banner[hidden] {
+      display: none;
+    }
+
+    .cookie-banner p {
+      font-size: 0.86rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.85rem;
+    }
+
+    .cookie-actions {
+      display: flex;
+      gap: 0.6rem;
+      justify-content: flex-end;
+    }
+
+    @media (max-width: 960px) {
+      .hero-grid,
+      .bio-grid,
+      .story-banner,
+      .cards-grid-3,
+      .pillars-grid,
+      .highlight-trio {
+        grid-template-columns: 1fr;
+      }
+
+      .important-grid,
+      .me-photo-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .nav-toggle {
+        display: inline-block;
+      }
+
+      .site-nav {
+        display: none;
+        width: 100%;
+      }
+
+      .site-nav.is-open {
+        display: block;
+      }
+
+      .header-inner {
+        flex-wrap: wrap;
+      }
+
+      .site-nav ul {
+        flex-direction: column;
+        align-items: stretch;
+        padding-top: 0.5rem;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .important-grid,
+      .me-photo-row,
+      .craft-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body id="top">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="#top" class="brand">
+        <img src="/images/logo.png" alt="Craig Brothers avatar" width="512" height="683">
+        <span class="brand-meta">
+          <span>Craig Brothers</span>
+          <span class="brand-sub">STEPHENTOWN, NY // ENGINEER &amp; CREATOR</span>
+        </span>
+      </a>
+
+      <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav">
+        Menu
+      </button>
+
+      <nav id="primaryNav" class="site-nav" aria-label="Primary navigation">
+        <ul>
+          <li><a href="#me">About Me</a></li>
+          <li><a href="#engineering">Engineering</a></li>
+          <li><a href="#music">Music</a></li>
+          <li><a href="#karry">Karry</a></li>
+          <li><a href="#freya">Freya</a></li>
+          <li><a href="#kora">Kora</a></li>
+          <li><a href="#gus">Gus</a></li>
+          <li><a href="#friends">Friends</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- HERO / HOME -->
+    <section class="hero" aria-labelledby="heroHeading">
+      <div class="hero-grid">
+        <div>
+          <span class="eyebrow">SYS_ENGINEER :: MUSICIAN :: WANNABE_FARMER</span>
+          <h1 id="heroHeading">Building resilient systems, sonic worlds, and a life in Stephentown.</h1>
+          <p class="hero-quote">
+            "I'm an engineer, not a designer... so this site will take time to update." (Finally rebuilt on Cloudflare Workers for 2026.)
+          </p>
+          <p class="hero-lead">
+            Since March 2008, my wife Karry and I have called Stephentown, NY home while running
+            <a href="https://www.emerald-glen.com" target="_blank" rel="noopener noreferrer">Emerald Glen Equestrian Center</a>.
+            When I'm not wrestling frozen round bales in sub-zero wind or configuring enterprise infrastructure, I'm architecting homelab AI clusters, writing original music, or hanging out with our dogs Freya and Kora and my horse Gus.
+          </p>
+          <div class="hero-actions">
+            <a href="#engineering" class="btn btn-primary">Explore Engineering &amp; AI</a>
+            <a href="#music" class="btn btn-outline">Listen to the Music</a>
+            <a href="#karry" class="btn btn-outline">Meet the Family &amp; Crew</a>
+          </div>
+        </div>
+
+        <div class="hero-portrait-card">
+          <img src="/images/banner-me.jpg" alt="Craig Brothers smiling outdoors" width="697" height="929" fetchpriority="high">
+          <div class="hero-badge-bar">
+            <img src="/images/banner-home.jpg" alt="Original Craig Brothers site crest" width="340" height="267" fetchpriority="low" loading="lazy">
+            <span class="hero-badge-text">42.548N, 73.372W &middot; Emerald Glen &middot; Stephentown, NY</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="container important-strip">
+        <h2 class="important-title">Some of the things that are important to me...</h2>
+        <div class="important-grid">
+          <a href="#freya" class="important-card">
+            <img src="/images/home-01.jpg" alt="Freya - Our shooting Star" width="1200" height="1200" loading="lazy">
+            <div class="important-card-body">
+              <span class="important-card-title">Freya</span>
+              <span class="important-card-role">Shooting "Star" &rarr;</span>
+            </div>
+          </a>
+          <a href="#kora" class="important-card">
+            <img src="/images/home-02.jpg" alt="Kora - Chloe 2.0 Jack Russell Terrier" width="1200" height="1200" loading="lazy">
+            <div class="important-card-body">
+              <span class="important-card-title">Kora</span>
+              <span class="important-card-role">Chloe 2.0* &rarr;</span>
+            </div>
+          </a>
+          <a href="#gus" class="important-card">
+            <img src="/images/home-03.jpg" alt="Gus - Caesar Augustus" width="1200" height="1200" loading="lazy">
+            <div class="important-card-body">
+              <span class="important-card-title">Gus</span>
+              <span class="important-card-role">Caesar Augustus &rarr;</span>
+            </div>
+          </a>
+          <a href="#karry" class="important-card">
+            <img src="/images/home-04.jpg" alt="Karry and Craig together" width="1200" height="1200" loading="lazy">
+            <div class="important-card-body">
+              <span class="important-card-title">Karry</span>
+              <span class="important-card-role">My Better Half &rarr;</span>
+            </div>
+          </a>
+        </div>
+
+        <div class="pillars-grid">
+          <div class="pillar-box">
+            <h3>What I Do</h3>
+            <ul>
+              <li>&bull; IT Systems Engineer &amp; Cloud/Edge Architect</li>
+              <li>&bull; Musician, Songwriter &amp; Sonic Producer</li>
+              <li>&bull; Wannabe Farmer &amp; Midnight Bale Wrestler</li>
+              <li>&bull; Proud Pet Dad to Freya, Kora &amp; Gus</li>
+            </ul>
+          </div>
+          <div class="pillar-box">
+            <h3>Where I Am</h3>
+            <ul>
+              <li>&bull; <a href="https://www.emerald-glen.com" target="_blank" rel="noopener noreferrer">Emerald-Glen</a> (Stephentown, NY)</li>
+              <li>&bull; Home in the Taconic foothills since March 2008</li>
+              <li>&bull; Splitting hours between server racks, studio buses, and horse pastures</li>
+            </ul>
+          </div>
+          <div class="pillar-box">
+            <h3>What's New Since 2025</h3>
+            <ul>
+              <li>&bull; Three active studio projects (<a href="#music">Artificial Integrity, The Silent Whistle, Brothers Blues</a>)</li>
+              <li>&bull; Custom MCP Agent Suite &amp; Homelab Telemetry</li>
+              <li>&bull; Solved the 2-year headache saga &amp; back at 100%</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT ME (#me) -->
+    <section id="me" class="section section-alt" aria-labelledby="meHeading">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">CHAPTER 01 // CRAIG</span>
+          <h2 id="meHeading">How did you find me?</h2>
+          <p class="section-subtitle">Engineer at heart, farm hand by marriage, and relentless tinkerer.</p>
+        </div>
+
+        <div class="bio-grid">
+          <div class="prose">
+            <p>
+              I've been calling Stephentown, NY home since March 2008. Together with my wife, Karry, we run
+              <a href="https://www.emerald-glen.com" target="_blank" rel="noopener noreferrer">Emerald Glen Equestrian Center</a>
+              while juggling full-time work. It's a busy life, and it has definitely taught me the value of hard work - especially when I'm outside at midnight in -20F wind chill wrestling with frozen round bales!
+            </p>
+            <p>
+              Truth be told, the horses were Karry's idea. I didn't grow up around them, so I'm still learning the ropes. While Karry is the equestrian expert, I'm an engineer at heart. I love building things, tinkering, and problem-solving. When I have some free time, you'll usually find me designing websites, configuring network equipment, expanding our home automation and farm telemetry systems, or producing music in the studio.
+            </p>
+          </div>
+
+          <aside class="resilience-card" aria-labelledby="resilienceHeading">
+            <h3 id="resilienceHeading">Health &amp; Resilience</h3>
+            <p>
+              On <strong>May the 4th, 2011</strong>, I underwent Roux-en-Y gastric bypass surgery at 385 lbs. Losing 150 lbs let me ditch the CPAP machine, get on a horse and learn to ride Gus, and maintain comfortably in the mid-200s for well over a decade.
+            </p>
+            <p>
+              Between 2023 and 2025, an intense two-year battle with chronic migraines and blurred vision sent me through countless specialists until Neuro-Optician <strong>Dr. Sieburth</strong> solved the puzzle in May 2025: a gradual post-bypass <strong>copper and zinc deficiency</strong> had been starving my optic nerves and triggering the headaches. With targeted supplementation dialed in, the fog is gone and I'm back running at full speed.
+            </p>
+            <div class="tldr-callout">
+              tl;dr: Roux-en-Y gastric bypass patients should never stop taking their prescribed supplements!
+            </div>
+          </aside>
+        </div>
+
+        <div class="me-photo-row" aria-label="Craig photo highlights">
+                      <button type="button" class="gallery-thumb" data-lightbox-src="/images/me-01.jpg" data-lightbox-alt="Craig Brothers milestone photo 1" data-lightbox-caption="Craig Brothers milestone photo 1" data-lightbox-group="me" aria-label="View full photo: Craig Brothers milestone photo 1">
+              <img src="/images/me-01.jpg" alt="Craig Brothers milestone photo 1" width="724" height="701" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/me-02.jpg" data-lightbox-alt="Craig Brothers milestone photo 2" data-lightbox-caption="Craig Brothers milestone photo 2" data-lightbox-group="me" aria-label="View full photo: Craig Brothers milestone photo 2">
+              <img src="/images/me-02.jpg" alt="Craig Brothers milestone photo 2" width="1200" height="853" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/me-03.jpg" data-lightbox-alt="Craig Brothers milestone photo 3" data-lightbox-caption="Craig Brothers milestone photo 3" data-lightbox-group="me" aria-label="View full photo: Craig Brothers milestone photo 3">
+              <img src="/images/me-03.jpg" alt="Craig Brothers milestone photo 3" width="1200" height="1225" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/me-04.jpg" data-lightbox-alt="Craig Brothers milestone photo 4" data-lightbox-caption="Craig Brothers milestone photo 4" data-lightbox-group="me" aria-label="View full photo: Craig Brothers milestone photo 4">
+              <img src="/images/me-04.jpg" alt="Craig Brothers milestone photo 4" width="1200" height="800" loading="lazy">
+            </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ENGINEERING & ARCHITECTURE (#engineering) -->
+    <section id="engineering" class="section" aria-labelledby="engHeading">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">CHAPTER 02 // SYSTEMS &amp; SOFTWARE</span>
+          <h2 id="engHeading">Engineering &amp; Infrastructure</h2>
+          <p class="section-subtitle">
+            From high-availability farm telemetry and Proxmox clusters to custom Model Context Protocol (MCP) agent tooling and EVE Online market analytics.
+          </p>
+        </div>
+
+        <div class="cards-grid-3">
+          <article class="feature-card">
+            <div>
+              <span class="feature-tag">Infrastructure &amp; IoT</span>
+              <h3>Homelab &amp; Farm Telemetry</h3>
+              <p>
+                Enterprise-grade infrastructure deployed across a working horse farm. High-availability Proxmox and Docker Swarm nodes power local LLM inference, vector memory (Qdrant), Prometheus/Grafana observability, and automated outdoor farm monitoring.
+              </p>
+              <ul class="spec-list">
+                <li>&gt; Proxmox VE + Docker Swarm Cluster</li>
+                <li>&gt; Home Assistant + Ambient Weather Overlay</li>
+                <li>&gt; Blue Iris 4K Reolink &amp; WAVLINK Outdoor Wi-Fi 6</li>
+                <li>&gt; Cloudflare Edge Workers + Azure Key Vault</li>
+              </ul>
+            </div>
+            <div class="card-links">
+              <a href="https://www.emerald-glen.com" target="_blank" rel="noopener noreferrer" class="chip-link">Emerald Glen Live Hub &nearr;</a>
+            </div>
+          </article>
+
+          <article class="feature-card">
+            <div>
+              <span class="feature-tag">AI Agents &amp; Rust</span>
+              <h3>Custom AI Agent &amp; MCP Ecosystem</h3>
+              <p>
+                Custom Model Context Protocol (MCP) servers and autonomous agent workflows bridging creative production, cloud operations, and the 13-application Rust <strong>ArtCraft Creative Suite</strong> (PhotoCraft, LightCraft, VectorCraft, SoundCraft, FilmCraft, and more).
+              </p>
+              <ul class="spec-list">
+                <li>&gt; Custom MCP Servers (Suno, YouTube Persona, Homelab)</li>
+                <li>&gt; ArtCraft 13-App Rust Creative Bridge</li>
+                <li>&gt; Automated Video, SEO &amp; Sonic Pipelines</li>
+                <li>&gt; Persistent Markdown &amp; Vector Agent Memory</li>
+              </ul>
+            </div>
+            <div class="card-links">
+              <a href="#music" class="chip-link">See Studio Output &darr;</a>
+            </div>
+          </article>
+
+          <article class="feature-card">
+            <div>
+              <span class="feature-tag">Full-Stack Architecture</span>
+              <h3>EVE Online SkillFarmManager (SFM)</h3>
+              <p>
+                A multi-service ecosystem engineered for large-scale EVE Online character skill-farm optimization, ESI telemetry auditing, catalog indexing, and real-time Jita market margin analysis.
+              </p>
+              <ul class="spec-list">
+                <li>&gt; SkillFarmManager Core Orchestrator</li>
+                <li>&gt; SFM-Audit &amp; ESI Token Telemetry</li>
+                <li>&gt; SFM-Catalogs &amp; SFM-Market Analytics</li>
+                <li>&gt; Automated Ledger &amp; Extraction Yield Modeling</li>
+              </ul>
+            </div>
+            <div class="card-links">
+              <a href="https://github.com/cbrothers" target="_blank" rel="noopener noreferrer" class="chip-link">GitHub @cbrothers &nearr;</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- MUSIC & SONIC WORLDS (#music) -->
+    <section id="music" class="section section-alt" aria-labelledby="musicHeading">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">CHAPTER 03 // SONIC ARCHITECTURE</span>
+          <h2 id="musicHeading">Music &amp; Studio Projects</h2>
+          <p class="section-subtitle">
+            Human lyrics, personal stories, and late-night studio sessions shaped across three distinct sonic imprints.
+          </p>
+        </div>
+
+        <div class="cards-grid-3">
+          <article class="feature-card">
+            <div>
+              <span class="feature-tag">100% Carbon Songwriting &middot; 50% Silicon Production</span>
+              <h3>Artificial Integrity</h3>
+              <p>
+                Fronted by digital persona <strong>Rydika</strong> ("The Carbon Architect"), Artificial Integrity blends progressive Floydian space-rock, industrial synth-grit, and nocturnal bass-heavy dub with deeply personal human songwriting.
+              </p>
+              <ul class="spec-list">
+                <li>&gt; Debut Album: Pretty on the Outside (17 Tracks)</li>
+                <li>&gt; Follow-Up LP: Echoes in the Static</li>
+                <li>&gt; Genre: Prog-Rock / Industrial / Space-Dub</li>
+              </ul>
+            </div>
+            <div class="card-links">
+              <a href="https://www.artificialintegritymusic.com" target="_blank" rel="noopener noreferrer" class="chip-link">Website &nearr;</a>
+              <a href="https://www.youtube.com/@ArtificialIntegrityMusic" target="_blank" rel="noopener noreferrer" class="chip-link">YouTube &nearr;</a>
+              <a href="https://open.spotify.com/artist/44Qy7QIhKIgk367GciRLDo" target="_blank" rel="noopener noreferrer" class="chip-link">Spotify &nearr;</a>
+            </div>
+          </article>
+
+          <article class="feature-card">
+            <div>
+              <span class="feature-tag">Midnight Meridian &middot; Americana Noir</span>
+              <h3>The Silent Whistle</h3>
+              <p>
+                Cinematic desert-noir storytelling, weeping pedal steel, baritone guitars, and dust-bowl grit anchored by dual vocalists <strong>Kira &amp; Brodie</strong> across narrative concept albums like <em>Betting on the Dust</em>.
+              </p>
+              <ul class="spec-list">
+                <li>&gt; Album: Betting on the Dust</li>
+                <li>&gt; Vocalists: Kira (Mezzo) &amp; Brodie (Baritone)</li>
+                <li>&gt; Genre: Dark Americana / Outlaw Folk-Noir</li>
+              </ul>
+            </div>
+            <div class="card-links">
+              <a href="https://www.thesilentwhistleband.com" target="_blank" rel="noopener noreferrer" class="chip-link">Website &nearr;</a>
+              <a href="https://www.youtube.com/channel/UCbbXCHc1Bk8pTmqF1BKsJWw" target="_blank" rel="noopener noreferrer" class="chip-link">YouTube &nearr;</a>
+            </div>
+          </article>
+
+          <article class="feature-card">
+            <div>
+              <span class="feature-tag">The Acoustic Side of AI</span>
+              <h3>Brothers Blues / AI Unplugged</h3>
+              <p>
+                Stripping back the wall of synthesizers in favor of warm timber, resonant dreadnought acoustics, porch-stomp percussion, and intimate unplugged arrangements recorded with raw room presence.
+              </p>
+              <ul class="spec-list">
+                <li>&gt; Imprint: Brothers Blues / AI Unplugged</li>
+                <li>&gt; Instrumentation: Resonator, Martin Acoustic, Upright Bass</li>
+                <li>&gt; Genre: Unplugged Folk-Rock / Acoustic Blues</li>
+              </ul>
+            </div>
+            <div class="card-links">
+              <a href="https://www.brothersblues.com" target="_blank" rel="noopener noreferrer" class="chip-link">Website &nearr;</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- KARRY (#karry) -->
+    <section id="karry" class="section" aria-labelledby="karryHeading">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">CHAPTER 04 // KARRY</span>
+          <h2 id="karryHeading">Where to begin... No, seriously... where?</h2>
+          <p class="section-subtitle">The heart and soul of Emerald Glen Equestrian Center.</p>
+        </div>
+
+        <div class="story-banner">
+          <div class="prose">
+            <p>
+              I have been with Karry longer than I have been apart from her at this point in my life and I can honestly say that I wouldn't know what to do with myself if she wasn't in my life!
+            </p>
+            <p>
+              While I can go on and on... I'll spare you the read here. Pictures are much better at expressing my feelings and sharing moments in time.
+            </p>
+            <div class="hero-actions">
+              <a href="https://www.emerald-glen.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Visit Emerald Glen Equestrian Center &nearr;</a>
+            </div>
+          </div>
+
+          <div class="story-banner-img">
+            <img src="/images/banner-karry.jpg" alt="Karry Brothers banner portrait" width="1600" height="900" loading="lazy">
+          </div>
+        </div>
+
+        <div class="gallery-header">
+          <h3>Moments with Karry</h3>
+          <span class="gallery-hint">Click any photo to open full-screen</span>
+        </div>
+        <div class="photo-gallery" aria-label="Karry photo gallery">
+                      <button type="button" class="gallery-thumb" data-lightbox-src="/images/karry-01.jpg" data-lightbox-alt="Karry and Craig smiling together outdoors" data-lightbox-caption="Karry and Craig smiling together outdoors" data-lightbox-group="karry" aria-label="View full photo: Karry and Craig smiling together outdoors">
+              <img src="/images/karry-01.jpg" alt="Karry and Craig smiling together outdoors" width="1200" height="2133" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/karry-02.jpg" data-lightbox-alt="Sunset silhouettes and quiet farm moments with Karry" data-lightbox-caption="Sunset silhouettes and quiet farm moments with Karry" data-lightbox-group="karry" aria-label="View full photo: Sunset silhouettes and quiet farm moments with Karry">
+              <img src="/images/karry-02.jpg" alt="Sunset silhouettes and quiet farm moments with Karry" width="1200" height="675" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/karry-03.jpg" data-lightbox-alt="Karry and Craig dressed up for an evening out" data-lightbox-caption="Karry and Craig dressed up for an evening out" data-lightbox-group="karry" aria-label="View full photo: Karry and Craig dressed up for an evening out">
+              <img src="/images/karry-03.jpg" alt="Karry and Craig dressed up for an evening out" width="960" height="1280" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/karry-04.jpg" data-lightbox-alt="Early memories together - Craig and Karry" data-lightbox-caption="Early memories together - Craig and Karry" data-lightbox-group="karry" aria-label="View full photo: Early memories together - Craig and Karry">
+              <img src="/images/karry-04.jpg" alt="Early memories together - Craig and Karry" width="600" height="750" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/karry-05.jpg" data-lightbox-alt="Captured candid moment with Karry" data-lightbox-caption="Captured candid moment with Karry" data-lightbox-group="karry" aria-label="View full photo: Captured candid moment with Karry">
+              <img src="/images/karry-05.jpg" alt="Captured candid moment with Karry" width="705" height="564" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/karry-06.jpg" data-lightbox-alt="Life at Emerald Glen in Stephentown, NY" data-lightbox-caption="Life at Emerald Glen in Stephentown, NY" data-lightbox-group="karry" aria-label="View full photo: Life at Emerald Glen in Stephentown, NY">
+              <img src="/images/karry-06.jpg" alt="Life at Emerald Glen in Stephentown, NY" width="1200" height="1600" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/karry-07.jpg" data-lightbox-alt="Adventure day together with Karry" data-lightbox-caption="Adventure day together with Karry" data-lightbox-group="karry" aria-label="View full photo: Adventure day together with Karry">
+              <img src="/images/karry-07.jpg" alt="Adventure day together with Karry" width="1200" height="1600" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/karry-08.jpg" data-lightbox-alt="Panoramic view from a favorite getaway with Karry" data-lightbox-caption="Panoramic view from a favorite getaway with Karry" data-lightbox-group="karry" aria-label="View full photo: Panoramic view from a favorite getaway with Karry">
+              <img src="/images/karry-08.jpg" alt="Panoramic view from a favorite getaway with Karry" width="1200" height="675" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/karry-09.jpg" data-lightbox-alt="Sharing laughs and fresh air together" data-lightbox-caption="Sharing laughs and fresh air together" data-lightbox-group="karry" aria-label="View full photo: Sharing laughs and fresh air together">
+              <img src="/images/karry-09.jpg" alt="Sharing laughs and fresh air together" width="1200" height="675" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/karry-10.jpg" data-lightbox-alt="Out on the property at Emerald Glen" data-lightbox-caption="Out on the property at Emerald Glen" data-lightbox-group="karry" aria-label="View full photo: Out on the property at Emerald Glen">
+              <img src="/images/karry-10.jpg" alt="Out on the property at Emerald Glen" width="1200" height="675" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/karry-11.jpg" data-lightbox-alt="Classic throwback portrait of Karry and Craig" data-lightbox-caption="Classic throwback portrait of Karry and Craig" data-lightbox-group="karry" aria-label="View full photo: Classic throwback portrait of Karry and Craig">
+              <img src="/images/karry-11.jpg" alt="Classic throwback portrait of Karry and Craig" width="288" height="365" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/karry-12.jpg" data-lightbox-alt="Celebrating another chapter together" data-lightbox-caption="Celebrating another chapter together" data-lightbox-group="karry" aria-label="View full photo: Celebrating another chapter together">
+              <img src="/images/karry-12.jpg" alt="Celebrating another chapter together" width="1200" height="1600" loading="lazy">
+            </button>
+        </div>
+
+        <div class="craft-panel">
+          <div class="craft-header">
+            <div>
+              <span class="feature-tag">Handcrafted Equestrian Art</span>
+              <h3>Karry's Tree of Life Horse Shoes</h3>
+              <p class="section-subtitle">
+                Somehow, on all of her "free time", Karry works away on these shoes for folks. Such a creative idea and she's made so many!
+              </p>
+            </div>
+            <a href="https://www.facebook.com/karryshorseshoetrees" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+              Visit Karry's Tree of Life Horse Shoes on Facebook &nearr;
+            </a>
+          </div>
+          <div class="craft-grid">
+                        <button type="button" class="gallery-thumb" data-lightbox-src="/images/karry-13.jpg" data-lightbox-alt="Karry Tree of Life Horse Shoes custom wire-wrapped horseshoe art 1" data-lightbox-caption="Karry Tree of Life Horse Shoes custom wire-wrapped horseshoe art 1" data-lightbox-group="karry-craft" aria-label="View full photo: Karry Tree of Life Horse Shoes custom wire-wrapped horseshoe art 1">
+              <img src="/images/karry-13.jpg" alt="Karry Tree of Life Horse Shoes custom wire-wrapped horseshoe art 1" width="468" height="263" loading="lazy">
+            </button>
+                        <button type="button" class="gallery-thumb" data-lightbox-src="/images/karry-14.jpg" data-lightbox-alt="Karry Tree of Life Horse Shoes collection display" data-lightbox-caption="Karry Tree of Life Horse Shoes collection display" data-lightbox-group="karry-craft" aria-label="View full photo: Karry Tree of Life Horse Shoes collection display">
+              <img src="/images/karry-14.jpg" alt="Karry Tree of Life Horse Shoes collection display" width="1200" height="578" loading="lazy">
+            </button>
+                        <button type="button" class="gallery-thumb" data-lightbox-src="/images/karry-15.jpg" data-lightbox-alt="Karry Tree of Life Horse Shoes handcrafted beaded tree sculpture" data-lightbox-caption="Karry Tree of Life Horse Shoes handcrafted beaded tree sculpture" data-lightbox-group="karry-craft" aria-label="View full photo: Karry Tree of Life Horse Shoes handcrafted beaded tree sculpture">
+              <img src="/images/karry-15.jpg" alt="Karry Tree of Life Horse Shoes handcrafted beaded tree sculpture" width="1200" height="1003" loading="lazy">
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FREYA (#freya) -->
+    <section id="freya" class="section section-alt" aria-labelledby="freyaHeading">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">CHAPTER 05 // FREYA</span>
+          <h2 id="freyaHeading">Freya - Our shooting "Star"</h2>
+          <p class="section-subtitle">Adopted Summer 2024 from Homeward Bound Dog Rescue.</p>
+        </div>
+
+        <div class="story-banner">
+          <div class="prose">
+            <p>
+              Our journey with Freya began in the summer of 2024 when Karry spotted her on the
+              <a href="https://homewardbounddogrescue.com/" target="_blank" rel="noopener noreferrer">Homeward Bound Dog Rescue</a>
+              website, where she was listed as "Star." Something about her sweet face and bright eyes drew us in immediately, and we knew we had to meet her.
+            </p>
+            <p>
+              When we arrived at the rescue, we were approved and headed home with her within an hour! They were happy to hear we already had a Russell and a Husky at home, knowing she would be in good company. Once she got here, she quickly made the place her own, getting along wonderfully with both Maya and Kora.
+            </p>
+            <p>
+              Now, she and Kora are practically glued to each other's hips. Whether they're wrestling, chasing after birds, or just causing adorable chaos, Freya has brought a whole new energy to our home, and we couldn't imagine life without her!
+            </p>
+          </div>
+
+          <div class="story-banner-img">
+            <img src="/images/banner-freya.jpg" alt="Freya looking noble in Stephentown" width="1600" height="2125" loading="lazy">
+          </div>
+        </div>
+
+        <div class="dna-card">
+          <div class="dna-header">
+            <div>
+              <h3>Embark DNA Breed Breakdown</h3>
+              <p class="section-subtitle">
+                Homeward Bound listed her as a husky, so we sent a DNA sample in to Embark - here is what makes up Freya:
+              </p>
+            </div>
+            <a href="https://app.embarkvet.com/pet/3d5d0bc4-583e-45fd-9288-20bb1fff1a48/about" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+              View Official Embark Profile &nearr;
+            </a>
+          </div>
+          <div class="dna-bars">
+            <div>
+              <div class="dna-row-label"><span>German Shepherd Dog</span><span>45.0%</span></div>
+              <div class="dna-track"><div class="dna-fill" style="--dna-pct: 45%;"></div></div>
+            </div>
+            <div>
+              <div class="dna-row-label"><span>Supermutt</span><span>24.6%</span></div>
+              <div class="dna-track"><div class="dna-fill" style="--dna-pct: 24.6%;"></div></div>
+            </div>
+            <div>
+              <div class="dna-row-label"><span>Siberian Husky</span><span>21.7%</span></div>
+              <div class="dna-track"><div class="dna-fill" style="--dna-pct: 21.7%;"></div></div>
+            </div>
+            <div>
+              <div class="dna-row-label"><span>Great Pyrenees</span><span>8.7%</span></div>
+              <div class="dna-track"><div class="dna-fill" style="--dna-pct: 8.7%;"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="highlight-trio">
+          <article class="highlight-item">
+            <img src="/images/freya-25.jpg" alt="Maya and Freya resting in the shade" width="1200" height="1200" loading="lazy">
+            <div class="highlight-item-body">
+              <h3>Rest in the shade</h3>
+              <p>Maya "tolerated" Freya as best she could. But as she grew older, Freya's energy became too much for her to handle.</p>
+            </div>
+          </article>
+          <article class="highlight-item">
+            <img src="/images/freya-26.jpg" alt="Freya Embark DNA badge" width="171" height="171" loading="lazy">
+            <div class="highlight-item-body">
+              <h3><a href="https://app.embarkvet.com/pet/3d5d0bc4-583e-45fd-9288-20bb1fff1a48/about" target="_blank" rel="noopener noreferrer">DNA Results &nearr;</a></h3>
+              <p>Her results were surprising! Let's say there's more husky in there than there shows...</p>
+            </div>
+          </article>
+          <article class="highlight-item">
+            <img src="/images/freya-27.jpg" alt="Freya sitting like a human on the furniture" width="1200" height="1200" loading="lazy">
+            <div class="highlight-item-body">
+              <h3>This is mine now...</h3>
+              <p>It may take some help, but Freya wants to fit in with all the humans.</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="gallery-header">
+          <h3>Freya Photo Gallery (24 Photos)</h3>
+          <span class="gallery-hint">Click any photo to open full-screen</span>
+        </div>
+        <div class="photo-gallery" aria-label="Freya photo gallery">
+                      <button type="button" class="gallery-thumb" data-lightbox-src="/images/freya-01.jpg" data-lightbox-alt="Freya on alert in the yard at Stephentown" data-lightbox-caption="Freya on alert in the yard at Stephentown" data-lightbox-group="freya" aria-label="View full photo: Freya on alert in the yard at Stephentown">
+              <img src="/images/freya-01.jpg" alt="Freya on alert in the yard at Stephentown" width="1200" height="1538" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/freya-02.jpg" data-lightbox-alt="Freya relaxing indoors after a full sprint" data-lightbox-caption="Freya relaxing indoors after a full sprint" data-lightbox-group="freya" aria-label="View full photo: Freya relaxing indoors after a full sprint">
+              <img src="/images/freya-02.jpg" alt="Freya relaxing indoors after a full sprint" width="1200" height="2133" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/freya-03.jpg" data-lightbox-alt="Freya and Kora plotting their next wrestling match" data-lightbox-caption="Freya and Kora plotting their next wrestling match" data-lightbox-group="freya" aria-label="View full photo: Freya and Kora plotting their next wrestling match">
+              <img src="/images/freya-03.jpg" alt="Freya and Kora plotting their next wrestling match" width="1200" height="904" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/freya-04.jpg" data-lightbox-alt="Freya stretching out across the deck" data-lightbox-caption="Freya stretching out across the deck" data-lightbox-group="freya" aria-label="View full photo: Freya stretching out across the deck">
+              <img src="/images/freya-04.jpg" alt="Freya stretching out across the deck" width="1200" height="675" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/freya-05.jpg" data-lightbox-alt="Close-up portrait of Freya and her expressive ears" data-lightbox-caption="Close-up portrait of Freya and her expressive ears" data-lightbox-group="freya" aria-label="View full photo: Close-up portrait of Freya and her expressive ears">
+              <img src="/images/freya-05.jpg" alt="Close-up portrait of Freya and her expressive ears" width="1200" height="1594" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/freya-06.jpg" data-lightbox-alt="Freya and Kora sharing watch duty" data-lightbox-caption="Freya and Kora sharing watch duty" data-lightbox-group="freya" aria-label="View full photo: Freya and Kora sharing watch duty">
+              <img src="/images/freya-06.jpg" alt="Freya and Kora sharing watch duty" width="1200" height="675" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/freya-07.jpg" data-lightbox-alt="Playtime chaos in the living room" data-lightbox-caption="Playtime chaos in the living room" data-lightbox-group="freya" aria-label="View full photo: Playtime chaos in the living room">
+              <img src="/images/freya-07.jpg" alt="Playtime chaos in the living room" width="1200" height="904" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/freya-08.jpg" data-lightbox-alt="Outdoor patrol across the pastures" data-lightbox-caption="Outdoor patrol across the pastures" data-lightbox-group="freya" aria-label="View full photo: Outdoor patrol across the pastures">
+              <img src="/images/freya-08.jpg" alt="Outdoor patrol across the pastures" width="1200" height="675" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/freya-09.jpg" data-lightbox-alt="Freya claiming the couch as her own" data-lightbox-caption="Freya claiming the couch as her own" data-lightbox-group="freya" aria-label="View full photo: Freya claiming the couch as her own">
+              <img src="/images/freya-09.jpg" alt="Freya claiming the couch as her own" width="1200" height="2133" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/freya-10.jpg" data-lightbox-alt="Sunbathing after chasing birds" data-lightbox-caption="Sunbathing after chasing birds" data-lightbox-group="freya" aria-label="View full photo: Sunbathing after chasing birds">
+              <img src="/images/freya-10.jpg" alt="Sunbathing after chasing birds" width="1200" height="650" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/freya-11.jpg" data-lightbox-alt="Freya showing off her German Shepherd and Husky heritage" data-lightbox-caption="Freya showing off her German Shepherd and Husky heritage" data-lightbox-group="freya" aria-label="View full photo: Freya showing off her German Shepherd and Husky heritage">
+              <img src="/images/freya-11.jpg" alt="Freya showing off her German Shepherd and Husky heritage" width="1200" height="1594" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/freya-12.jpg" data-lightbox-alt="Side-by-side pack nap with Kora" data-lightbox-caption="Side-by-side pack nap with Kora" data-lightbox-group="freya" aria-label="View full photo: Side-by-side pack nap with Kora">
+              <img src="/images/freya-12.jpg" alt="Side-by-side pack nap with Kora" width="1200" height="675" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/freya-13.jpg" data-lightbox-alt="Keeping an eye on the farm driveway" data-lightbox-caption="Keeping an eye on the farm driveway" data-lightbox-group="freya" aria-label="View full photo: Keeping an eye on the farm driveway">
+              <img src="/images/freya-13.jpg" alt="Keeping an eye on the farm driveway" width="1200" height="675" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/freya-14.jpg" data-lightbox-alt="Freya curious head tilt" data-lightbox-caption="Freya curious head tilt" data-lightbox-group="freya" aria-label="View full photo: Freya curious head tilt">
+              <img src="/images/freya-14.jpg" alt="Freya curious head tilt" width="1200" height="1600" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/freya-15.jpg" data-lightbox-alt="Tall and proud - our shooting Star" data-lightbox-caption="Tall and proud - our shooting Star" data-lightbox-group="freya" aria-label="View full photo: Tall and proud - our shooting Star">
+              <img src="/images/freya-15.jpg" alt="Tall and proud - our shooting Star" width="1200" height="2133" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/freya-16.jpg" data-lightbox-alt="Post-zoomies grin from Freya" data-lightbox-caption="Post-zoomies grin from Freya" data-lightbox-group="freya" aria-label="View full photo: Post-zoomies grin from Freya">
+              <img src="/images/freya-16.jpg" alt="Post-zoomies grin from Freya" width="1200" height="1594" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/freya-17.jpg" data-lightbox-alt="Afternoon shade break in Stephentown" data-lightbox-caption="Afternoon shade break in Stephentown" data-lightbox-group="freya" aria-label="View full photo: Afternoon shade break in Stephentown">
+              <img src="/images/freya-17.jpg" alt="Afternoon shade break in Stephentown" width="1200" height="1594" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/freya-18.jpg" data-lightbox-alt="Freya waiting patiently for a treat" data-lightbox-caption="Freya waiting patiently for a treat" data-lightbox-group="freya" aria-label="View full photo: Freya waiting patiently for a treat">
+              <img src="/images/freya-18.jpg" alt="Freya waiting patiently for a treat" width="1200" height="1594" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/freya-19.jpg" data-lightbox-alt="Full-length portrait of Freya indoors" data-lightbox-caption="Full-length portrait of Freya indoors" data-lightbox-group="freya" aria-label="View full photo: Full-length portrait of Freya indoors">
+              <img src="/images/freya-19.jpg" alt="Full-length portrait of Freya indoors" width="1200" height="2133" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/freya-20.jpg" data-lightbox-alt="Snuggled up after a long day on the farm" data-lightbox-caption="Snuggled up after a long day on the farm" data-lightbox-group="freya" aria-label="View full photo: Snuggled up after a long day on the farm">
+              <img src="/images/freya-20.jpg" alt="Snuggled up after a long day on the farm" width="1200" height="1594" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/freya-21.jpg" data-lightbox-alt="Wrestle session with her best friend Kora" data-lightbox-caption="Wrestle session with her best friend Kora" data-lightbox-group="freya" aria-label="View full photo: Wrestle session with her best friend Kora">
+              <img src="/images/freya-21.jpg" alt="Wrestle session with her best friend Kora" width="1200" height="904" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/freya-22.jpg" data-lightbox-alt="Looking majestic between rounds of adorable chaos" data-lightbox-caption="Looking majestic between rounds of adorable chaos" data-lightbox-group="freya" aria-label="View full photo: Looking majestic between rounds of adorable chaos">
+              <img src="/images/freya-22.jpg" alt="Looking majestic between rounds of adorable chaos" width="1200" height="2133" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/freya-23.jpg" data-lightbox-alt="Pack life with Maya and Kora" data-lightbox-caption="Pack life with Maya and Kora" data-lightbox-group="freya" aria-label="View full photo: Pack life with Maya and Kora">
+              <img src="/images/freya-23.jpg" alt="Pack life with Maya and Kora" width="1200" height="904" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/freya-24.jpg" data-lightbox-alt="Freya settled in at home" data-lightbox-caption="Freya settled in at home" data-lightbox-group="freya" aria-label="View full photo: Freya settled in at home">
+              <img src="/images/freya-24.jpg" alt="Freya settled in at home" width="1200" height="904" loading="lazy">
+            </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- KORA (#kora) -->
+    <section id="kora" class="section" aria-labelledby="koraHeading">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">CHAPTER 06 // KORA</span>
+          <h2 id="koraHeading">Kora - Chloe 2.0*</h2>
+          <p class="section-subtitle">Flown up from Florida in Spring 2024 with a bark ten times her size.</p>
+        </div>
+
+        <div class="story-banner">
+          <div class="prose">
+            <p>
+              Several months after the passing of Karry's beloved Jack Russell, Chloe, Karry got the itch again for another Jack Russell, and Maya needed some company. So in the spring of 2024, we welcomed Kora into our lives! She was flown from Florida
+              (<a href="https://www.butterballkennel.com/" target="_blank" rel="noopener noreferrer">Butterball Kennel</a>)
+              to Bradley International Airport, ready to start her new adventure with us.
+            </p>
+            <p>
+              Kora is a playful, tiny whirlwind of energy with a bark that can startle anyone who isn't expecting it! When she's not zooming around the house or playing with Freya, she has two favorite spots: sitting on the back of Karry's recliner while Karry works, or curling up between my knees to soak up the heat from my laptop.
+            </p>
+            <p>
+              She may be small, but she has a huge personality and has brought so much warmth and fun into our home!
+            </p>
+          </div>
+
+          <div class="story-banner-img">
+            <img src="/images/banner-kora.jpg" alt="Kora banner portrait" width="1600" height="900" loading="lazy">
+          </div>
+        </div>
+
+        <div class="gallery-header">
+          <h3>Kora Photo Gallery (25 Photos)</h3>
+          <span class="gallery-hint">Click any photo to open full-screen</span>
+        </div>
+        <div class="photo-gallery" aria-label="Kora photo gallery">
+                      <button type="button" class="gallery-thumb" data-lightbox-src="/images/kora-01.jpg" data-lightbox-alt="Kora feature portrait at home" data-lightbox-caption="Kora feature portrait at home" data-lightbox-group="kora" aria-label="View full photo: Kora feature portrait at home">
+              <img src="/images/kora-01.jpg" alt="Kora feature portrait at home" width="1200" height="812" loading="lazy">
+            </button>
+                      <button type="button" class="gallery-thumb" data-lightbox-src="/images/kora-02.jpg" data-lightbox-alt="Kora keeping watch from the back of the recliner" data-lightbox-caption="Kora keeping watch from the back of the recliner" data-lightbox-group="kora" aria-label="View full photo: Kora keeping watch from the back of the recliner">
+              <img src="/images/kora-02.jpg" alt="Kora keeping watch from the back of the recliner" width="1200" height="675" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/kora-03.jpg" data-lightbox-alt="Kora curled up soaking in warmth" data-lightbox-caption="Kora curled up soaking in warmth" data-lightbox-group="kora" aria-label="View full photo: Kora curled up soaking in warmth">
+              <img src="/images/kora-03.jpg" alt="Kora curled up soaking in warmth" width="1200" height="2133" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/kora-04.jpg" data-lightbox-alt="Tiny Jack Russell whirlwind pausing for a photo" data-lightbox-caption="Tiny Jack Russell whirlwind pausing for a photo" data-lightbox-group="kora" aria-label="View full photo: Tiny Jack Russell whirlwind pausing for a photo">
+              <img src="/images/kora-04.jpg" alt="Tiny Jack Russell whirlwind pausing for a photo" width="1200" height="2133" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/kora-05.jpg" data-lightbox-alt="Kora looking up with unmistakable Jack Russell focus" data-lightbox-caption="Kora looking up with unmistakable Jack Russell focus" data-lightbox-group="kora" aria-label="View full photo: Kora looking up with unmistakable Jack Russell focus">
+              <img src="/images/kora-05.jpg" alt="Kora looking up with unmistakable Jack Russell focus" width="1200" height="2133" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/kora-06.jpg" data-lightbox-alt="Kora inspecting her domain at Emerald Glen" data-lightbox-caption="Kora inspecting her domain at Emerald Glen" data-lightbox-group="kora" aria-label="View full photo: Kora inspecting her domain at Emerald Glen">
+              <img src="/images/kora-06.jpg" alt="Kora inspecting her domain at Emerald Glen" width="1200" height="1897" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/kora-07.jpg" data-lightbox-alt="Kora and Freya curled up together" data-lightbox-caption="Kora and Freya curled up together" data-lightbox-group="kora" aria-label="View full photo: Kora and Freya curled up together">
+              <img src="/images/kora-07.jpg" alt="Kora and Freya curled up together" width="1200" height="904" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/kora-08.jpg" data-lightbox-alt="Kora supervising the day from her favorite cushion" data-lightbox-caption="Kora supervising the day from her favorite cushion" data-lightbox-group="kora" aria-label="View full photo: Kora supervising the day from her favorite cushion">
+              <img src="/images/kora-08.jpg" alt="Kora supervising the day from her favorite cushion" width="1200" height="904" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/kora-09.jpg" data-lightbox-alt="Resting between bursts of high-speed zoomies" data-lightbox-caption="Resting between bursts of high-speed zoomies" data-lightbox-group="kora" aria-label="View full photo: Resting between bursts of high-speed zoomies">
+              <img src="/images/kora-09.jpg" alt="Resting between bursts of high-speed zoomies" width="1200" height="904" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/kora-10.jpg" data-lightbox-alt="Portrait of Kora - Chloe 2.0" data-lightbox-caption="Portrait of Kora - Chloe 2.0" data-lightbox-group="kora" aria-label="View full photo: Portrait of Kora - Chloe 2.0">
+              <img src="/images/kora-10.jpg" alt="Portrait of Kora - Chloe 2.0" width="1200" height="1594" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/kora-11.jpg" data-lightbox-alt="Out in the grass on a sunny Stephentown afternoon" data-lightbox-caption="Out in the grass on a sunny Stephentown afternoon" data-lightbox-group="kora" aria-label="View full photo: Out in the grass on a sunny Stephentown afternoon">
+              <img src="/images/kora-11.jpg" alt="Out in the grass on a sunny Stephentown afternoon" width="1200" height="900" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/kora-12.jpg" data-lightbox-alt="Kora perched right behind Karry while she works" data-lightbox-caption="Kora perched right behind Karry while she works" data-lightbox-group="kora" aria-label="View full photo: Kora perched right behind Karry while she works">
+              <img src="/images/kora-12.jpg" alt="Kora perched right behind Karry while she works" width="1200" height="2133" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/kora-13.jpg" data-lightbox-alt="Playtime tug-of-war with Freya" data-lightbox-caption="Playtime tug-of-war with Freya" data-lightbox-group="kora" aria-label="View full photo: Playtime tug-of-war with Freya">
+              <img src="/images/kora-13.jpg" alt="Playtime tug-of-war with Freya" width="1200" height="900" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/kora-14.jpg" data-lightbox-alt="Cozied up in a blanket fort" data-lightbox-caption="Cozied up in a blanket fort" data-lightbox-group="kora" aria-label="View full photo: Cozied up in a blanket fort">
+              <img src="/images/kora-14.jpg" alt="Cozied up in a blanket fort" width="1200" height="904" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/kora-15.jpg" data-lightbox-alt="Bright-eyed and ready to bark at a leaf" data-lightbox-caption="Bright-eyed and ready to bark at a leaf" data-lightbox-group="kora" aria-label="View full photo: Bright-eyed and ready to bark at a leaf">
+              <img src="/images/kora-15.jpg" alt="Bright-eyed and ready to bark at a leaf" width="1200" height="904" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/kora-16.jpg" data-lightbox-alt="Stretched out in a patch of afternoon sun" data-lightbox-caption="Stretched out in a patch of afternoon sun" data-lightbox-group="kora" aria-label="View full photo: Stretched out in a patch of afternoon sun">
+              <img src="/images/kora-16.jpg" alt="Stretched out in a patch of afternoon sun" width="1200" height="675" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/kora-17.jpg" data-lightbox-alt="Sweet close-up of Kora" data-lightbox-caption="Sweet close-up of Kora" data-lightbox-group="kora" aria-label="View full photo: Sweet close-up of Kora">
+              <img src="/images/kora-17.jpg" alt="Sweet close-up of Kora" width="1200" height="2133" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/kora-18.jpg" data-lightbox-alt="Sharing space with the pack" data-lightbox-caption="Sharing space with the pack" data-lightbox-group="kora" aria-label="View full photo: Sharing space with the pack">
+              <img src="/images/kora-18.jpg" alt="Sharing space with the pack" width="1200" height="904" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/kora-19.jpg" data-lightbox-alt="Ready for action at a moment notice" data-lightbox-caption="Ready for action at a moment notice" data-lightbox-group="kora" aria-label="View full photo: Ready for action at a moment notice">
+              <img src="/images/kora-19.jpg" alt="Ready for action at a moment notice" width="1200" height="2133" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/kora-20.jpg" data-lightbox-alt="Absorbing laptop heat during a coding session" data-lightbox-caption="Absorbing laptop heat during a coding session" data-lightbox-group="kora" aria-label="View full photo: Absorbing laptop heat during a coding session">
+              <img src="/images/kora-20.jpg" alt="Absorbing laptop heat during a coding session" width="1200" height="2133" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/kora-21.jpg" data-lightbox-alt="Post-playtime snooze" data-lightbox-caption="Post-playtime snooze" data-lightbox-group="kora" aria-label="View full photo: Post-playtime snooze">
+              <img src="/images/kora-21.jpg" alt="Post-playtime snooze" width="1200" height="2133" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/kora-22.jpg" data-lightbox-alt="Sharp portrait of Kora in natural light" data-lightbox-caption="Sharp portrait of Kora in natural light" data-lightbox-group="kora" aria-label="View full photo: Sharp portrait of Kora in natural light">
+              <img src="/images/kora-22.jpg" alt="Sharp portrait of Kora in natural light" width="1200" height="2133" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/kora-23.jpg" data-lightbox-alt="Hanging out with her oversized shadow Freya" data-lightbox-caption="Hanging out with her oversized shadow Freya" data-lightbox-group="kora" aria-label="View full photo: Hanging out with her oversized shadow Freya">
+              <img src="/images/kora-23.jpg" alt="Hanging out with her oversized shadow Freya" width="1200" height="904" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/kora-24.jpg" data-lightbox-alt="Alert ears and signature Jack Russell charm" data-lightbox-caption="Alert ears and signature Jack Russell charm" data-lightbox-group="kora" aria-label="View full photo: Alert ears and signature Jack Russell charm">
+              <img src="/images/kora-24.jpg" alt="Alert ears and signature Jack Russell charm" width="1200" height="1594" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/kora-25.jpg" data-lightbox-alt="Curled up contentedly at home" data-lightbox-caption="Curled up contentedly at home" data-lightbox-group="kora" aria-label="View full photo: Curled up contentedly at home">
+              <img src="/images/kora-25.jpg" alt="Curled up contentedly at home" width="1200" height="904" loading="lazy">
+            </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- GUS (#gus) -->
+    <section id="gus" class="section section-alt" aria-labelledby="gusHeading">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">CHAPTER 07 // GUS</span>
+          <h2 id="gusHeading">Gus - Caesar Augustus</h2>
+          <p class="section-subtitle">Also Known As: Grumpus &middot; GusGus &middot; Goose &middot; The Babysitter</p>
+        </div>
+
+        <div class="story-banner">
+          <div class="prose">
+            <p>
+              Gus came to us as Karry's Dressage horse. After a short while, Gus decided he wasn't into the showing scene and Karry retired him by "giving" him to me.
+            </p>
+            <p>
+              We did some low-level western dressage which he seemed to enjoy much more than the collection that is required in traditional dressage.
+            </p>
+            <p>
+              Gus currently serves as one of Karry's lesson horses at
+              <a href="https://www.emerald-glen.com" target="_blank" rel="noopener noreferrer">Emerald Glen</a>
+              for those <del>dumb enough</del> crazy enough to want to learn to ride.
+            </p>
+          </div>
+
+          <div class="story-banner-img">
+            <img src="/images/banner-gus.jpg" alt="Gus (Caesar Augustus) in the pasture at Emerald Glen" width="1600" height="1066" loading="lazy">
+          </div>
+        </div>
+
+        <div class="gallery-header">
+          <h3>Gus Photo Gallery (10 Photos)</h3>
+          <span class="gallery-hint">Click any photo to open full-screen</span>
+        </div>
+        <div class="photo-gallery" aria-label="Gus photo gallery">
+                      <button type="button" class="gallery-thumb" data-lightbox-src="/images/gus-01.jpg" data-lightbox-alt="Caesar Augustus (Gus) looking regal in the bridle" data-lightbox-caption="Caesar Augustus (Gus) looking regal in the bridle" data-lightbox-group="gus" aria-label="View full photo: Caesar Augustus (Gus) looking regal in the bridle">
+              <img src="/images/gus-01.jpg" alt="Caesar Augustus (Gus) looking regal in the bridle" width="1200" height="1600" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/gus-02.jpg" data-lightbox-alt="Gus enjoying western dressage out in the ring" data-lightbox-caption="Gus enjoying western dressage out in the ring" data-lightbox-group="gus" aria-label="View full photo: Gus enjoying western dressage out in the ring">
+              <img src="/images/gus-02.jpg" alt="Gus enjoying western dressage out in the ring" width="1200" height="1600" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/gus-03.jpg" data-lightbox-alt="Close-up portrait of Gus at Emerald Glen Equestrian Center" data-lightbox-caption="Close-up portrait of Gus at Emerald Glen Equestrian Center" data-lightbox-group="gus" aria-label="View full photo: Close-up portrait of Gus at Emerald Glen Equestrian Center">
+              <img src="/images/gus-03.jpg" alt="Close-up portrait of Gus at Emerald Glen Equestrian Center" width="1200" height="1600" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/gus-04.jpg" data-lightbox-alt="Gus saddled up and ready for a relaxed ride" data-lightbox-caption="Gus saddled up and ready for a relaxed ride" data-lightbox-group="gus" aria-label="View full photo: Gus saddled up and ready for a relaxed ride">
+              <img src="/images/gus-04.jpg" alt="Gus saddled up and ready for a relaxed ride" width="1200" height="1600" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/gus-05.jpg" data-lightbox-alt="Gus on duty as The Babysitter at Emerald Glen" data-lightbox-caption="Gus on duty as The Babysitter at Emerald Glen" data-lightbox-group="gus" aria-label="View full photo: Gus on duty as The Babysitter at Emerald Glen">
+              <img src="/images/gus-05.jpg" alt="Gus on duty as The Babysitter at Emerald Glen" width="1200" height="1600" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/gus-06.jpg" data-lightbox-alt="Sunny turnout day in Stephentown for Gus" data-lightbox-caption="Sunny turnout day in Stephentown for Gus" data-lightbox-group="gus" aria-label="View full photo: Sunny turnout day in Stephentown for Gus">
+              <img src="/images/gus-06.jpg" alt="Sunny turnout day in Stephentown for Gus" width="1200" height="1600" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/gus-07.jpg" data-lightbox-alt="Gus showing off his calm lesson-horse demeanor" data-lightbox-caption="Gus showing off his calm lesson-horse demeanor" data-lightbox-group="gus" aria-label="View full photo: Gus showing off his calm lesson-horse demeanor">
+              <img src="/images/gus-07.jpg" alt="Gus showing off his calm lesson-horse demeanor" width="1200" height="1600" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/gus-08.jpg" data-lightbox-alt="Out in the pasture at Emerald Glen" data-lightbox-caption="Out in the pasture at Emerald Glen" data-lightbox-group="gus" aria-label="View full photo: Out in the pasture at Emerald Glen">
+              <img src="/images/gus-08.jpg" alt="Out in the pasture at Emerald Glen" width="1200" height="900" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/gus-09.jpg" data-lightbox-alt="Craig and Gus enjoying low-level western dressage" data-lightbox-caption="Craig and Gus enjoying low-level western dressage" data-lightbox-group="gus" aria-label="View full photo: Craig and Gus enjoying low-level western dressage">
+              <img src="/images/gus-09.jpg" alt="Craig and Gus enjoying low-level western dressage" width="1200" height="900" loading="lazy">
+            </button>
+            <button type="button" class="gallery-thumb" data-lightbox-src="/images/gus-10.jpg" data-lightbox-alt="Gus relaxing in the paddock with herd friends" data-lightbox-caption="Gus relaxing in the paddock with herd friends" data-lightbox-group="gus" aria-label="View full photo: Gus relaxing in the paddock with herd friends">
+              <img src="/images/gus-10.jpg" alt="Gus relaxing in the paddock with herd friends" width="1200" height="900" loading="lazy">
+            </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOCAL FRIENDS & COMMUNITY (#friends) -->
+    <section id="friends" class="section" aria-labelledby="friendsHeading">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">CHAPTER 08 // COMMUNITY</span>
+          <h2 id="friendsHeading">Some Local Friends &amp; Favorites</h2>
+          <p class="section-subtitle">Neighbors, rescues, and small businesses we love supporting.</p>
+        </div>
+
+        <div class="friends-grid">
+          <a href="https://www.emerald-glen.com" target="_blank" rel="noopener noreferrer" class="friend-card">
+            <div>
+              <h3>Emerald Glen Equestrian Center</h3>
+              <p>Our home farm in Stephentown, NY - boarding, lessons, and horsemanship with Karry.</p>
+            </div>
+            <span class="friend-url">emerald-glen.com &nearr;</span>
+          </a>
+
+          <a href="https://www.gardnerscoffeeshoppe.com/" target="_blank" rel="noopener noreferrer" class="friend-card">
+            <div>
+              <h3>Gardner's Coffee Shoppe</h3>
+              <p>Our favorite local spot in Stephentown for great coffee, breakfast, and community conversation.</p>
+            </div>
+            <span class="friend-url">gardnerscoffeeshoppe.com &nearr;</span>
+          </a>
+
+          <a href="https://www.cinchemupstables.com/" target="_blank" rel="noopener noreferrer" class="friend-card">
+            <div>
+              <h3>Cinch 'em Up Stables</h3>
+              <p>Fellow equestrian friends and horsemanship community.</p>
+            </div>
+            <span class="friend-url">cinchemupstables.com &nearr;</span>
+          </a>
+
+          <a href="https://homewardbounddogrescue.com/" target="_blank" rel="noopener noreferrer" class="friend-card">
+            <div>
+              <h3>Homeward Bound Dog Rescue</h3>
+              <p>The wonderful rescue organization that brought Freya ("Star") into our family.</p>
+            </div>
+            <span class="friend-url">homewardbounddogrescue.com &nearr;</span>
+          </a>
+
+          <a href="https://www.butterballkennel.com/" target="_blank" rel="noopener noreferrer" class="friend-card">
+            <div>
+              <h3>Butterball Kennel</h3>
+              <p>Where our tiny Jack Russell whirlwind Kora started her journey before flying north.</p>
+            </div>
+            <span class="friend-url">butterballkennel.com &nearr;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Native Modal Lightbox Dialog with closedby="any" -->
+  <dialog id="lightboxDialog" closedby="any" aria-labelledby="lightboxTitle">
+    <div class="lightbox-top">
+      <h2 id="lightboxTitle" class="lightbox-title">Photo Preview</h2>
+      <div class="lightbox-controls">
+        <button type="button" id="lightboxPrev" class="lightbox-btn" aria-label="Previous photo">&larr; Prev</button>
+        <button type="button" id="lightboxNext" class="lightbox-btn" aria-label="Next photo">Next &rarr;</button>
+        <form method="dialog">
+          <button type="submit" class="lightbox-btn" aria-label="Close photo preview">Close &times;</button>
+        </form>
+      </div>
+    </div>
+    <div class="lightbox-stage">
+      <img id="lightboxImage" src="/images/banner-me.jpg" alt="Expanded gallery preview" width="697" height="929" loading="lazy">
+    </div>
+  </dialog>
+
+  <!-- Cookie Consent Banner -->
+  <aside id="cookieBanner" class="cookie-banner" aria-label="Cookie consent" hidden>
+    <p>
+      We use optional Google Analytics cookies (<code>G-W8W15JLP5W</code>) to understand site traffic. Analytics remain disabled unless you accept.
+    </p>
+    <div class="cookie-actions">
+      <button type="button" id="cookieDeclineBtn" class="btn btn-outline">Decline</button>
+      <button type="button" id="cookieAcceptBtn" class="btn btn-primary">Accept Analytics</button>
+    </div>
+  </aside>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>&copy; 2026 Craig Brothers &middot; Stephentown, NY &middot; Hosted on Cloudflare Workers</p>
+      <div class="footer-links">
+        <a href="#top">Back to top &uarr;</a>
+        <a href="https://www.emerald-glen.com" target="_blank" rel="noopener noreferrer">Emerald-Glen</a>
+        <a href="https://www.artificialintegritymusic.com" target="_blank" rel="noopener noreferrer">Artificial Integrity</a>
+        <button type="button" id="privacyManageBtn" class="link-btn">Privacy &amp; Cookies</button>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // 1. Mobile Navigation Toggle
+    const navToggle = document.getElementById('navToggle');
+    const primaryNav = document.getElementById('primaryNav');
+    if (navToggle && primaryNav) {
+      navToggle.addEventListener('click', () => {
+        const isOpen = primaryNav.classList.toggle('is-open');
+        navToggle.setAttribute('aria-expanded', String(isOpen));
+      });
+      primaryNav.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+          primaryNav.classList.remove('is-open');
+          navToggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+
+    // 2. Native Modal Lightbox Dialog + Mandatory closedby Fallback
+    const dialog = document.getElementById('lightboxDialog');
+    const lightboxImg = document.getElementById('lightboxImage');
+    const lightboxTitle = document.getElementById('lightboxTitle');
+    const prevBtn = document.getElementById('lightboxPrev');
+    const nextBtn = document.getElementById('lightboxNext');
+    const thumbs = Array.from(document.querySelectorAll('.gallery-thumb'));
+    let activeIndex = 0;
+
+    function showPhotoAt(index) {
+      if (!thumbs.length) return;
+      activeIndex = (index + thumbs.length) % thumbs.length;
+      const btn = thumbs[activeIndex];
+      const src = btn.getAttribute('data-lightbox-src');
+      const alt = btn.getAttribute('data-lightbox-alt') || 'Gallery photo';
+      const cap = btn.getAttribute('data-lightbox-caption') || alt;
+      if (lightboxImg && src) {
+        lightboxImg.src = src;
+        lightboxImg.alt = alt;
+      }
+      if (lightboxTitle) {
+        lightboxTitle.textContent = cap;
+      }
+    }
+
+    thumbs.forEach((btn, idx) => {
+      btn.addEventListener('click', () => {
+        showPhotoAt(idx);
+        if (dialog && typeof dialog.showModal === 'function') {
+          dialog.showModal();
+        }
+      });
+    });
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => showPhotoAt(activeIndex - 1));
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => showPhotoAt(activeIndex + 1));
+    }
+
+    document.addEventListener('keydown', (event) => {
+      if (!dialog || !dialog.open) return;
+      if (event.key === 'ArrowLeft') showPhotoAt(activeIndex - 1);
+      if (event.key === 'ArrowRight') showPhotoAt(activeIndex + 1);
+    });
+
+    // Fallback for browsers without closedby support
+    if (dialog && !('closedBy' in HTMLDialogElement.prototype)) {
+      dialog.addEventListener('click', (event) => {
+        if (event.target !== dialog) return;
+        const rect = dialog.getBoundingClientRect();
+        const isDialogContent = (
+          rect.top <= event.clientY &&
+          event.clientY <= rect.top + rect.height &&
+          rect.left <= event.clientX &&
+          event.clientX <= rect.left + rect.width
+        );
+        if (isDialogContent) return;
+        dialog.close();
+      });
+    }
+
+    // 3. Google Analytics 4 Consent Mode v2 Management
+    const CONSENT_KEY = 'cb_cookie_consent_v1';
+    const cookieBanner = document.getElementById('cookieBanner');
+    const acceptBtn = document.getElementById('cookieAcceptBtn');
+    const declineBtn = document.getElementById('cookieDeclineBtn');
+    const manageBtn = document.getElementById('privacyManageBtn');
+    let gaScriptLoaded = false;
+
+    function loadGaScript() {
+      if (gaScriptLoaded || !window.GA_MEASUREMENT_ID) return;
+      gaScriptLoaded = true;
+      const s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(window.GA_MEASUREMENT_ID);
+      document.head.appendChild(s);
+      gtag('js', new Date());
+      gtag('config', window.GA_MEASUREMENT_ID, { anonymize_ip: true });
+    }
+
+    function clearGaCookies() {
+      const names = document.cookie.split(';').map((c) => c.trim().split('=')[0]);
+      names.forEach((name) => {
+        if (name.startsWith('_ga')) {
+          document.cookie = name + '=; Max-Age=0; path=/';
+          document.cookie = name + '=; Max-Age=0; path=/; domain=' + location.hostname;
+        }
+      });
+    }
+
+    function applyConsent(choice) {
+      if (choice === 'accepted') {
+        gtag('consent', 'update', { analytics_storage: 'granted' });
+        loadGaScript();
+      } else {
+        gtag('consent', 'update', { analytics_storage: 'denied' });
+        clearGaCookies();
+      }
+    }
+
+    try {
+      const saved = localStorage.getItem(CONSENT_KEY);
+      if (saved === 'accepted' || saved === 'declined') {
+        applyConsent(saved);
+      } else if (cookieBanner) {
+        cookieBanner.hidden = false;
+      }
+    } catch {
+      if (cookieBanner) cookieBanner.hidden = false;
+    }
+
+    if (acceptBtn) {
+      acceptBtn.addEventListener('click', () => {
+        try { localStorage.setItem(CONSENT_KEY, 'accepted'); } catch {}
+        applyConsent('accepted');
+        if (cookieBanner) cookieBanner.hidden = true;
+      });
+    }
+
+    if (declineBtn) {
+      declineBtn.addEventListener('click', () => {
+        try { localStorage.setItem(CONSENT_KEY, 'declined'); } catch {}
+        applyConsent('declined');
+        if (cookieBanner) cookieBanner.hidden = true;
+      });
+    }
+
+    if (manageBtn) {
+      manageBtn.addEventListener('click', () => {
+        try { localStorage.removeItem(CONSENT_KEY); } catch {}
+        applyConsent('declined');
+        if (cookieBanner) cookieBanner.hidden = false;
+      });
+    }
+  </script>
+</body>
+</html>
