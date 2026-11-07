@@ -190,10 +190,11 @@ describe('4. HTML Semantics, Accessibility & Native Lightbox Dialog', () => {
   });
 });
 
-describe('5. Cloudflare Worker Edge Middleware, Redirects & GA4 Consent Mode v2', () => {
-  it('configures GA4 Measurement ID G-W8W15JLP5W with Consent Mode v2 default denied', () => {
-    assert.ok(indexHtml.includes("G-W8W15JLP5W"), 'Missing GA4 Measurement ID G-W8W15JLP5W');
-    assert.ok(indexHtml.includes("analytics_storage: 'denied'"), 'Missing Consent Mode v2 default denied');
+describe('5. Cloudflare Worker Edge Middleware, Redirects & GA4 Tag', () => {
+  it('configures GA4 Measurement ID G-W8W15JLP5W directly in head without consent banner', () => {
+    assert.ok(indexHtml.includes('https://www.googletagmanager.com/gtag/js?id=G-W8W15JLP5W'), 'Missing gtag.js script for G-W8W15JLP5W');
+    assert.ok(indexHtml.includes("gtag('config', 'G-W8W15JLP5W')"), 'Missing gtag config call for G-W8W15JLP5W');
+    assert.equal(indexHtml.includes('cookieBanner'), false, 'Should not include cookie consent banner');
   });
 
   it('configures legacy Google Sites redirects in both _redirects and functions/_middleware.js', () => {

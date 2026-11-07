@@ -12,7 +12,7 @@ Personal hub for **Craig Brothers** in Stephentown, NY - IT Systems Engineer, ho
   - Owner override via `STUDIO_OVERRIDE_KEY` (`?studio_override=`, `x-studio-override` header, or `__cb_studio_override` cookie) and `ALLOWLIST_IPS`
   - Staging protection (`stage.craigbrothers.com` serves `X-Robots-Tag: noindex, nofollow` and `Disallow: /` on `/robots.txt`)
   - Health endpoint at `/__health`
-- **Analytics**: Google Analytics 4 (`G-W8W15JLP5W`) with Consent Mode v2 (default denied until user consent).
+- **Analytics**: Google Analytics 4 (`G-W8W15JLP5W`) loaded directly in `<head>`.
 
 ## Commands
 

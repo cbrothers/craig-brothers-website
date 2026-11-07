@@ -30,18 +30,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
 
-  <!-- Google Analytics 4 with Consent Mode v2 (Default Denied until user consent) -->
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8W15JLP5W"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag('consent', 'default', {
-      ad_storage: 'denied',
-      ad_user_data: 'denied',
-      ad_personalization: 'denied',
-      analytics_storage: 'denied',
-      wait_for_update: 500
-    });
-    window.GA_MEASUREMENT_ID = 'G-W8W15JLP5W';
+    gtag('js', new Date());
+    gtag('config', 'G-W8W15JLP5W');
   </script>
 
   <!-- Structured Data -->
@@ -947,47 +942,6 @@
       flex-wrap: wrap;
     }
 
-    .link-btn {
-      background: none;
-      border: none;
-      color: var(--text-secondary);
-      font-size: 0.88rem;
-      cursor: pointer;
-      text-decoration: underline;
-    }
-
-    /* Cookie Consent Banner */
-    .cookie-banner {
-      position: fixed;
-      bottom: 1.25rem;
-      right: 1.25rem;
-      left: 1.25rem;
-      max-width: 520px;
-      margin-left: auto;
-      background: var(--bg-elevated);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      padding: 1.15rem 1.35rem;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65);
-      z-index: 200;
-    }
-
-    .cookie-banner[hidden] {
-      display: none;
-    }
-
-    .cookie-banner p {
-      font-size: 0.86rem;
-      color: var(--text-secondary);
-      margin-bottom: 0.85rem;
-    }
-
-    .cookie-actions {
-      display: flex;
-      gap: 0.6rem;
-      justify-content: flex-end;
-    }
-
     @media (max-width: 960px) {
       .hero-grid,
       .bio-grid,
@@ -1874,17 +1828,6 @@
     </div>
   </dialog>
 
-  <!-- Cookie Consent Banner -->
-  <aside id="cookieBanner" class="cookie-banner" aria-label="Cookie consent" hidden>
-    <p>
-      We use optional Google Analytics cookies (<code>G-W8W15JLP5W</code>) to understand site traffic. Analytics remain disabled unless you accept.
-    </p>
-    <div class="cookie-actions">
-      <button type="button" id="cookieDeclineBtn" class="btn btn-outline">Decline</button>
-      <button type="button" id="cookieAcceptBtn" class="btn btn-primary">Accept Analytics</button>
-    </div>
-  </aside>
-
   <footer class="site-footer">
     <div class="footer-inner">
       <p>&copy; 2026 Craig Brothers &middot; Stephentown, NY &middot; Hosted on Cloudflare Workers</p>
@@ -1892,7 +1835,6 @@
         <a href="#top">Back to top &uarr;</a>
         <a href="https://www.emerald-glen.com" target="_blank" rel="noopener noreferrer">Emerald-Glen</a>
         <a href="https://www.artificialintegritymusic.com" target="_blank" rel="noopener noreferrer">Artificial Integrity</a>
-        <button type="button" id="privacyManageBtn" class="link-btn">Privacy &amp; Cookies</button>
       </div>
     </div>
   </footer>
@@ -1974,80 +1916,6 @@
         );
         if (isDialogContent) return;
         dialog.close();
-      });
-    }
-
-    // 3. Google Analytics 4 Consent Mode v2 Management
-    const CONSENT_KEY = 'cb_cookie_consent_v1';
-    const cookieBanner = document.getElementById('cookieBanner');
-    const acceptBtn = document.getElementById('cookieAcceptBtn');
-    const declineBtn = document.getElementById('cookieDeclineBtn');
-    const manageBtn = document.getElementById('privacyManageBtn');
-    let gaScriptLoaded = false;
-
-    function loadGaScript() {
-      if (gaScriptLoaded || !window.GA_MEASUREMENT_ID) return;
-      gaScriptLoaded = true;
-      const s = document.createElement('script');
-      s.async = true;
-      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(window.GA_MEASUREMENT_ID);
-      document.head.appendChild(s);
-      gtag('js', new Date());
-      gtag('config', window.GA_MEASUREMENT_ID, { anonymize_ip: true });
-    }
-
-    function clearGaCookies() {
-      const names = document.cookie.split(';').map((c) => c.trim().split('=')[0]);
-      names.forEach((name) => {
-        if (name.startsWith('_ga')) {
-          document.cookie = name + '=; Max-Age=0; path=/';
-          document.cookie = name + '=; Max-Age=0; path=/; domain=' + location.hostname;
-        }
-      });
-    }
-
-    function applyConsent(choice) {
-      if (choice === 'accepted') {
-        gtag('consent', 'update', { analytics_storage: 'granted' });
-        loadGaScript();
-      } else {
-        gtag('consent', 'update', { analytics_storage: 'denied' });
-        clearGaCookies();
-      }
-    }
-
-    try {
-      const saved = localStorage.getItem(CONSENT_KEY);
-      if (saved === 'accepted' || saved === 'declined') {
-        applyConsent(saved);
-      } else if (cookieBanner) {
-        cookieBanner.hidden = false;
-      }
-    } catch {
-      if (cookieBanner) cookieBanner.hidden = false;
-    }
-
-    if (acceptBtn) {
-      acceptBtn.addEventListener('click', () => {
-        try { localStorage.setItem(CONSENT_KEY, 'accepted'); } catch {}
-        applyConsent('accepted');
-        if (cookieBanner) cookieBanner.hidden = true;
-      });
-    }
-
-    if (declineBtn) {
-      declineBtn.addEventListener('click', () => {
-        try { localStorage.setItem(CONSENT_KEY, 'declined'); } catch {}
-        applyConsent('declined');
-        if (cookieBanner) cookieBanner.hidden = true;
-      });
-    }
-
-    if (manageBtn) {
-      manageBtn.addEventListener('click', () => {
-        try { localStorage.removeItem(CONSENT_KEY); } catch {}
-        applyConsent('declined');
-        if (cookieBanner) cookieBanner.hidden = false;
       });
     }
   </script>
