@@ -1,4 +1,4 @@
-// Cloudflare Edge Security & Honeypot Middleware
+// Cloudflare Edge Security & Honeypot Middleware (v1.2)
 // Protects www.craigbrothers.com and stage.craigbrothers.com against automated vulnerability scanners,
 // handles legacy Google Sites route redirects, and enforces staging noindex headers.
 
@@ -8,21 +8,159 @@ const APEX_HOSTNAME = 'craigbrothers.com';
 const WWW_HOSTNAME = 'www.craigbrothers.com';
 const STAGE_HOSTNAME = 'stage.craigbrothers.com';
 
-// Legacy Google Sites routes redirected to single-page section anchors
+// Legacy Google Sites & trailing-slash route redirects
 const LEGACY_REDIRECTS = new Map([
   ['/home', '/'],
   ['/home/', '/'],
-  ['/me', '/#me'],
-  ['/me/', '/#me'],
-  ['/karry', '/#karry'],
-  ['/karry/', '/#karry'],
-  ['/freya', '/#freya'],
-  ['/freya/', '/#freya'],
-  ['/kora', '/#kora'],
-  ['/kora/', '/#kora'],
-  ['/gus', '/#gus'],
-  ['/gus/', '/#gus'],
+  ['/me/', '/me'],
+  ['/engineering/', '/engineering'],
+  ['/music/', '/music'],
+  ['/karry/', '/karry'],
+  ['/freya/', '/freya'],
+  ['/kora/', '/kora'],
+  ['/gus/', '/gus'],
+  ['/friends/', '/friends'],
 ]);
+
+// Clean section paths served with 200 OK and section-specific SEO metadata
+const SECTION_SEO_ROUTES = new Map([
+  [
+    '/me',
+    {
+      sectionId: 'me',
+      title: 'About Craig Brothers | Health, Resilience & Life in Stephentown, NY',
+      description:
+        'Background, health and resilience journey, and life at Emerald Glen in Stephentown, NY for Craig Brothers, Director of Systems Engineering and musician.',
+      image: 'https://www.craigbrothers.com/images/me-03.jpg',
+      imageAlt: 'Craig Brothers portrait in Stephentown, NY',
+    },
+  ],
+  [
+    '/engineering',
+    {
+      sectionId: 'engineering',
+      title: 'Engineering & AI | Craig Brothers - Director of Systems Engineering',
+      description:
+        '30+ years of enterprise systems engineering, Career Telemetry Scrubber (1999 to present), AI agent orchestration, ArtCraft 13-app Rust suite, and homelab infrastructure.',
+      image: 'https://www.craigbrothers.com/images/me-01.jpg',
+      imageAlt: 'Craig Brothers systems engineering and homelab architecture',
+    },
+  ],
+  [
+    '/music',
+    {
+      sectionId: 'music',
+      title: 'Music & Studio | Craig Brothers - Artificial Integrity, The Silent Whistle & More',
+      description:
+        'Human songwriting and AI-assisted sonic architecture by Craig Brothers: Artificial Integrity, The Silent Whistle, Copperhead Blues, and Brothers Blues.',
+      image: 'https://www.craigbrothers.com/images/me-02.jpg',
+      imageAlt: 'Craig Brothers music and studio projects',
+    },
+  ],
+  [
+    '/karry',
+    {
+      sectionId: 'karry',
+      title: 'Karry Brothers & Emerald Glen Equestrian Center | Craig Brothers',
+      description:
+        'Meet Karry Brothers, owner and head trainer at Emerald Glen Equestrian Center in Stephentown, NY, and explore photos from around the farm and dressage ring.',
+      image: 'https://www.craigbrothers.com/images/gp-karry-dressage-01.jpg',
+      imageAlt: 'Karry Brothers riding Gus in the dressage ring',
+    },
+  ],
+  [
+    '/freya',
+    {
+      sectionId: 'freya',
+      title: 'Freya - Our Shooting Star | Craig Brothers',
+      description:
+        'Photos, Embark DNA results, and stories of Freya, our border collie mix rescued via Homeward Bound Dog Rescue in Stephentown, NY.',
+      image: 'https://www.craigbrothers.com/images/home-01.jpg',
+      imageAlt: 'Freya - Our shooting Star',
+    },
+  ],
+  [
+    '/kora',
+    {
+      sectionId: 'kora',
+      title: 'Kora (Chloe 2.0) & Remembering Chloe and Maya | Craig Brothers',
+      description:
+        'Meet Kora, our Jack Russell Terrier from Butterball Kennel, and a tribute to Chloe and Maya at Emerald Glen in Stephentown, NY.',
+      image: 'https://www.craigbrothers.com/images/home-02.jpg',
+      imageAlt: 'Kora - Jack Russell Terrier at Emerald Glen',
+    },
+  ],
+  [
+    '/gus',
+    {
+      sectionId: 'gus',
+      title: 'Gus (Fuerst Glance) & Emerald Glen | Craig Brothers',
+      description:
+        'Meet Gus (Fuerst Glance), our Westfalen gelding by Fuerst Romancier at Emerald Glen Equestrian Center in Stephentown, NY.',
+      image: 'https://www.craigbrothers.com/images/home-03.jpg',
+      imageAlt: 'Gus at Emerald Glen Equestrian Center',
+    },
+  ],
+  [
+    '/friends',
+    {
+      sectionId: 'friends',
+      title: 'Friends, Neighbors & Community | Craig Brothers',
+      description:
+        'Regional businesses, rescue organizations, and community partners around Stephentown, NY and the Berkshires.',
+      image: 'https://www.craigbrothers.com/images/me-03.jpg',
+      imageAlt: 'Craig Brothers community and friends in Stephentown, NY',
+    },
+  ],
+]);
+
+function injectSectionSeoHtml(rawHtml, pathname, meta) {
+  if (typeof rawHtml !== 'string' || !meta) return rawHtml;
+  const canonicalUrl = `https://${WWW_HOSTNAME}${pathname}`;
+  let html = rawHtml;
+  html = html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${meta.title}</title>`);
+  html = html.replace(
+    /<meta\s+name="description"\s+content="[^"]*">/i,
+    `<meta name="description" content="${meta.description}">`
+  );
+  html = html.replace(
+    /<link\s+rel="canonical"\s+href="[^"]*">/i,
+    `<link rel="canonical" href="${canonicalUrl}">`
+  );
+  html = html.replace(
+    /<meta\s+property="og:title"\s+content="[^"]*">/i,
+    `<meta property="og:title" content="${meta.title}">`
+  );
+  html = html.replace(
+    /<meta\s+property="og:description"\s+content="[^"]*">/i,
+    `<meta property="og:description" content="${meta.description}">`
+  );
+  html = html.replace(
+    /<meta\s+property="og:url"\s+content="[^"]*">/i,
+    `<meta property="og:url" content="${canonicalUrl}">`
+  );
+  html = html.replace(
+    /<meta\s+property="og:image"\s+content="[^"]*">/i,
+    `<meta property="og:image" content="${meta.image}">`
+  );
+  html = html.replace(
+    /<meta\s+property="og:image:alt"\s+content="[^"]*">/i,
+    `<meta property="og:image:alt" content="${meta.imageAlt}">`
+  );
+  html = html.replace(
+    /<meta\s+name="twitter:title"\s+content="[^"]*">/i,
+    `<meta name="twitter:title" content="${meta.title}">`
+  );
+  html = html.replace(
+    /<meta\s+name="twitter:description"\s+content="[^"]*">/i,
+    `<meta name="twitter:description" content="${meta.description}">`
+  );
+  html = html.replace(
+    /<meta\s+name="twitter:image"\s+content="[^"]*">/i,
+    `<meta name="twitter:image" content="${meta.image}">`
+  );
+  return html;
+}
 
 // High-confidence exploit & scanner paths that no legitimate visitor or SEO crawler ever requests
 const SCANNER_EXACT_PATHS = new Set([
@@ -87,8 +225,28 @@ const SCANNER_EXTENSIONS = [
   '.conf',
 ];
 
+const VERIFIED_CRAWLER_UA_REGEX =
+  /\b(?:googlebot|google-inspectiontool|googleother|storebot-google|adsbot-google|mediapartners-google|apis-google|bingbot|adidxbot|applebot|duckduckbot|slurp|baiduspider|yandexbot|facebookexternalhit|facebot|linkedinbot|twitterbot|slackbot|discordbot)\b/i;
+
+const GOOGLEBOT_IP_PREFIXES = [
+  '66.249.',
+  '64.233.172.',
+  '64.233.173.',
+  '2001:4860:4801:',
+];
+
+function isVerifiedCrawler(request, clientIp = '') {
+  if (request?.cf?.botManagement?.verifiedBot === true) return true;
+  const ip = (clientIp || '').trim().toLowerCase();
+  if (ip && GOOGLEBOT_IP_PREFIXES.some((prefix) => ip.startsWith(prefix))) return true;
+  const ua = request?.headers?.get('User-Agent') || '';
+  if (ua && VERIFIED_CRAWLER_UA_REGEX.test(ua)) return true;
+  return false;
+}
+
 function isScannerRequest(pathname) {
   const lower = pathname.toLowerCase();
+  if (lower.startsWith('/cdn-cgi/')) return false;
   if (SCANNER_EXACT_PATHS.has(lower)) return true;
   if (SCANNER_PREFIXES.some((prefix) => lower.startsWith(prefix))) return true;
   if (SCANNER_EXTENSIONS.some((ext) => lower.endsWith(ext))) return true;
@@ -154,6 +312,35 @@ function isOwnerOverride(request, env, clientIp) {
   return { allowed: false, setCookie: false };
 }
 
+async function serveAssetOrSectionRoute(request, url, env, hostname) {
+  const lowerPath = url.pathname.toLowerCase();
+  const sectionMeta = SECTION_SEO_ROUTES.get(lowerPath);
+  if (sectionMeta && (request.method === 'GET' || request.method === 'HEAD')) {
+    const rootUrl = new URL('/', url.origin);
+    const rootResp = await env.ASSETS.fetch(new Request(rootUrl.toString(), request));
+    if (rootResp && rootResp.status === 200) {
+      if (request.method === 'HEAD') {
+        return applySecurityHeaders(rootResp, hostname);
+      }
+      const rawHtml = await rootResp.text();
+      const enrichedHtml = injectSectionSeoHtml(rawHtml, lowerPath, sectionMeta);
+      const headers = new Headers(rootResp.headers);
+      headers.delete('Content-Length');
+      return applySecurityHeaders(
+        new Response(enrichedHtml, {
+          status: 200,
+          statusText: 'OK',
+          headers,
+        }),
+        hostname
+      );
+    }
+  }
+
+  const assetResponse = await env.ASSETS.fetch(request);
+  return applySecurityHeaders(assetResponse, hostname);
+}
+
 function applySecurityHeaders(response, hostname, extraHeaders = {}) {
   const headers = new Headers(response.headers);
 
@@ -164,11 +351,17 @@ function applySecurityHeaders(response, hostname, extraHeaders = {}) {
   headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
   headers.set(
     'Content-Security-Policy',
-    "default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src https://td.doubleclick.net https://www.googletagmanager.com; connect-src 'self' https://cloudflareinsights.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://www.google.com https://stats.g.doubleclick.net; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'"
+    "default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self' https://cdn1.suno.ai https://cdn2.suno.ai https://*.suno.ai https://*.suno.com; frame-src https://td.doubleclick.net https://www.googletagmanager.com; connect-src 'self' https://cloudflareinsights.com https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://*.googletagmanager.com https://www.google.com https://stats.g.doubleclick.net; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'"
   );
 
   // Prevent search engine indexing on staging or preview URLs
   if (hostname === STAGE_HOSTNAME || hostname.endsWith('.workers.dev')) {
+    headers.set('X-Robots-Tag', 'noindex, nofollow');
+  }
+
+  // Never cache or index 4xx/5xx responses
+  if (response.status >= 400) {
+    headers.set('Cache-Control', 'no-store');
     headers.set('X-Robots-Tag', 'noindex, nofollow');
   }
 
@@ -235,6 +428,13 @@ async function handleRequest(request, env, ctx) {
     return Response.redirect(dest.toString(), 301);
   }
 
+  // Serve /favicon.png when legacy clients or crawlers request /favicon.ico
+  if (url.pathname.toLowerCase() === '/favicon.ico') {
+    const iconUrl = new URL('/favicon.png', url.origin);
+    const iconResp = await env.ASSETS.fetch(new Request(iconUrl.toString(), request));
+    return applySecurityHeaders(iconResp, hostname);
+  }
+
   const clientIp = request.headers.get('CF-Connecting-IP') || '';
   const kv = env.SECURITY_BANS;
 
@@ -258,8 +458,28 @@ async function handleRequest(request, env, ctx) {
       });
     }
 
-    const assetResponse = await env.ASSETS.fetch(request);
-    return applySecurityHeaders(assetResponse, hostname);
+    return serveAssetOrSectionRoute(request, url, env, hostname);
+  }
+
+  // Exempt verified search engine and social preview crawlers from IP bans
+  if (isVerifiedCrawler(request, clientIp)) {
+    if (kv && clientIp) {
+      ctx.waitUntil(kv.delete(`ban:${clientIp.toLowerCase()}`).catch(() => {}));
+    }
+    if (isScannerRequest(url.pathname)) {
+      return applySecurityHeaders(
+        new Response('Not Found', {
+          status: 404,
+          headers: {
+            'Content-Type': 'text/plain; charset=utf-8',
+            'Cache-Control': 'no-store',
+            'X-Robots-Tag': 'noindex, nofollow',
+          },
+        }),
+        hostname
+      );
+    }
+    return serveAssetOrSectionRoute(request, url, env, hostname);
   }
 
   // 1. Check if client IP is already banned in KV
@@ -310,8 +530,7 @@ async function handleRequest(request, env, ctx) {
     );
   }
 
-  const assetResponse = await env.ASSETS.fetch(request);
-  return applySecurityHeaders(assetResponse, hostname);
+  return serveAssetOrSectionRoute(request, url, env, hostname);
 }
 
 export default {

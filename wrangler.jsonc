@@ -6,6 +6,14 @@
   "preview_urls": true,
   "routes": [
     {
+      "pattern": "www.craigbrothers.com",
+      "custom_domain": true
+    },
+    {
+      "pattern": "craigbrothers.com",
+      "custom_domain": true
+    },
+    {
       "pattern": "stage.craigbrothers.com",
       "custom_domain": true
     }

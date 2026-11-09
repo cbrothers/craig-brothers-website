@@ -6,6 +6,7 @@
   "description": "Personal website for Craig Brothers (www.craigbrothers.com) - Cloudflare Workers + Static Assets",
   "scripts": {
     "build": "node scripts/build.js",
+    "dev": "node scripts/build.js && wrangler dev",
     "test": "node --test tests/site-integrity.test.js",
     "deploy": "wrangler deploy",
     "verify:deploy": "node scripts/verify-deploy.js"

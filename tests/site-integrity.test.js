@@ -71,19 +71,29 @@ describe('2. Content Integrity & Zero-Emdash Enforcement', () => {
       'Emerald Glen Equestrian Center',
       'Health &amp; Resilience',
       'May the 4th, 2011',
-      'Dr. Sieburth',
+      'neuro-optometrist',
       'Homelab &amp; Farm Telemetry',
       'Custom AI Agent &amp; MCP Ecosystem',
-      'EVE Online SkillFarmManager (SFM)',
-      'Artificial Integrity',
+      'The Path from Intern to Director of Systems Engineering',
+      'Tripod.com',
+      'Streetmail.com',
+      'eZiba.com',
+      'Mav-Mail / @utoRevenue',
+      'Dominion Dealer Solutions (DDS)',
+      'Dealer Specialties',
+      'Artificial Integrity / AI Unplugged',
       'https://www.artificialintegritymusic.com',
       'The Silent Whistle',
       'https://www.thesilentwhistleband.com',
-      'Brothers Blues / AI Unplugged',
+      'Brothers Blues',
       'https://www.brothersblues.com',
+      'Copperhead Blues',
       'Karry\'s Tree of Life Horse Shoes',
       'https://www.facebook.com/karryshorseshoetrees',
       'Homeward Bound Dog Rescue',
+      'https://suno.com/@craigbrothers/hook/f06d3c58-170e-48e2-af43-b958dea8d766',
+      'https://cdn1.suno.ai/hook_f06d3c58-170e-48e2-af43-b958dea8d766.mp4',
+      'Flying with Freya',
       'https://app.embarkvet.com/pet/3d5d0bc4-583e-45fd-9288-20bb1fff1a48/about',
       '45.0%',
       '24.6%',
@@ -93,32 +103,38 @@ describe('2. Content Integrity & Zero-Emdash Enforcement', () => {
       'Butterball Kennel',
       'Caesar Augustus',
       'The Babysitter',
+      'Oakencroft Equine Hospital',
+      'uveitis',
       'Gardner\'s Coffee Shoppe',
       'Cinch \'em Up Stables',
     ];
 
+    const normalizedHtml = indexHtml.replace(/\s+/g, ' ');
     for (const snippet of requiredSnippets) {
-      assert.ok(indexHtml.includes(snippet), `index.html missing expected content: ${snippet}`);
+      assert.ok(normalizedHtml.includes(snippet), `index.html missing expected content: ${snippet}`);
     }
   });
 
   it('omits excluded projects per Craig selection', () => {
-    assert.equal(indexHtml.includes('Dealer Specialties'), false, 'Should not include Dealer Specialties');
     assert.equal(indexHtml.includes('Tyrian Lens'), false, 'Should not include Tyrian Lens');
-    assert.equal(indexHtml.includes('Copperhead Blues'), false, 'Should not include Copperhead Blues');
+    assert.equal(indexHtml.includes('SkillFarmManager'), false, 'Should not include private SkillFarmManager app');
+    assert.equal(indexHtml.includes('Tri-Town Precision Plastics'), false, 'Should not include pre-internet Tri-Town job');
+    assert.equal(indexHtml.includes('Water Street Books'), false, 'Should not include pre-internet Water Street Books job');
   });
 });
 
-describe('3. Image Inventory & Priority Rules (92 Scraped Photos)', () => {
+describe('3. Image Inventory & Priority Rules (117 Total Photos & Logos)', () => {
   const imageFiles = fs.readdirSync(path.join(ROOT, 'images')).sort();
 
-  it('has all 92 scraped images in images/', () => {
-    assert.equal(imageFiles.length, 92, `Expected 92 images in images/, found ${imageFiles.length}`);
+  it('has all 117 images (91 original + 15 Google Photos picks + 2 Chloe & Maya photos + 1 Gus googly-eye photo + 8 Career Roadmap logos) in images/', () => {
+    assert.equal(imageFiles.length, 117, `Expected 117 images in images/, found ${imageFiles.length}`);
   });
 
-  it('references every image in images/ within index.html or 404.html and every referenced image exists', () => {
+  it('references every active image in images/ within index.html or 404.html and every referenced image exists', () => {
+    const retiredImages = new Set(['freya-27.jpg', 'logo-tritown.png', 'logo-waterstreet.jpg']);
     const combinedHtml = indexHtml + '\n' + notFoundHtml;
     for (const file of imageFiles) {
+      if (retiredImages.has(file)) continue;
       assert.ok(
         combinedHtml.includes(`/images/${file}`),
         `Image /images/${file} is not referenced in index.html or 404.html`
@@ -126,7 +142,7 @@ describe('3. Image Inventory & Priority Rules (92 Scraped Photos)', () => {
     }
 
     const refMatches = [...combinedHtml.matchAll(/src="\/images\/([^"]+)"/g)].map((m) => m[1]);
-    assert.ok(refMatches.length >= 92, 'Expected at least 92 image src references');
+    assert.ok(refMatches.length >= 108, 'Expected at least 108 image src references');
     for (const ref of refMatches) {
       assert.ok(
         fs.existsSync(path.join(ROOT, 'images', ref)),
@@ -137,7 +153,7 @@ describe('3. Image Inventory & Priority Rules (92 Scraped Photos)', () => {
 
   it('enforces width, height, alt, and fetchpriority/lazy loading rules on all <img> tags', () => {
     const imgTags = [...indexHtml.matchAll(/<img\b[^>]*>/g)].map((m) => m[0]);
-    assert.ok(imgTags.length >= 92, 'Expected at least 92 <img> tags in index.html');
+    assert.ok(imgTags.length >= 109, 'Expected at least 109 <img> tags in index.html');
 
     let highPriorityCount = 0;
     for (const tag of imgTags) {
@@ -199,28 +215,30 @@ describe('5. Cloudflare Worker Edge Middleware, Redirects & GA4 Tag', () => {
     assert.equal(indexHtml.includes('cookieBanner'), false, 'Should not include cookie consent banner');
   });
 
-  it('configures legacy Google Sites redirects in both _redirects and functions/_middleware.js', () => {
-    for (const route of ['/home', '/me', '/karry', '/freya', '/kora', '/gus']) {
-      assert.ok(redirectsFile.includes(route), `_redirects missing ${route}`);
+  it('configures clean section routes and legacy redirects in _redirects, functions/_middleware.js, and sitemap.xml', () => {
+    for (const route of ['/me', '/engineering', '/music', '/karry', '/freya', '/kora', '/gus', '/friends']) {
       assert.ok(middlewareJs.includes(`'${route}'`), `functions/_middleware.js missing ${route}`);
+      assert.ok(sitemapXml.includes(`https://www.craigbrothers.com${route}</loc>`), `sitemap.xml missing ${route}`);
     }
+    assert.ok(redirectsFile.includes('/home'), '_redirects missing /home');
+    assert.ok(middlewareJs.includes("'/home'"), 'functions/_middleware.js missing /home');
   });
 
-  it('configures Cloudflare Worker routes (stage.craigbrothers.com only pre-launch), KV binding, and security headers', () => {
+  it('configures Cloudflare Worker routes (www, apex, and stage), KV binding, and security headers', () => {
     assert.ok(wranglerJsonc.includes('stage.craigbrothers.com'));
-    assert.equal(wranglerJsonc.includes('"www.craigbrothers.com"'), false, 'Production www route should not be in wrangler.jsonc before prod launch');
-    assert.equal(wranglerJsonc.includes('"craigbrothers.com"'), false, 'Production apex route should not be in wrangler.jsonc before prod launch');
+    assert.ok(wranglerJsonc.includes('"www.craigbrothers.com"'), 'Production www route should be configured in wrangler.jsonc');
+    assert.ok(wranglerJsonc.includes('"craigbrothers.com"'), 'Production apex route should be configured in wrangler.jsonc');
     assert.ok(wranglerJsonc.includes('8042e1b5ee4b42279489114046987cf6'));
     assert.ok(middlewareJs.includes('/__health'));
     assert.ok(middlewareJs.includes('__cb_studio_override'));
     assert.ok(headersFile.includes('Strict-Transport-Security'));
     assert.ok(robotsTxt.includes('https://www.craigbrothers.com/sitemap.xml'));
-    assert.ok(sitemapXml.includes('https://www.craigbrothers.com/'));
+    assert.ok(sitemapXml.includes('https://www.craigbrothers.com/</loc>'));
   });
 });
 
 describe('6. Worker Middleware Functional Simulation', () => {
-  it('handles /__health, legacy 301 redirects, staging noindex, and scanner 403 bans', async () => {
+  it('handles /__health, clean section 200 SEO routes, legacy 301 redirects, staging noindex, and scanner 403 bans', async () => {
     const workerModule = await import('../functions/_middleware.js');
     const worker = workerModule.default;
 
@@ -234,10 +252,13 @@ describe('6. Worker Middleware Functional Simulation', () => {
       },
       ASSETS: {
         async fetch() {
-          return new Response('<html><body>Craig Brothers</body></html>', {
-            status: 200,
-            headers: { 'Content-Type': 'text/html' },
-          });
+          return new Response(
+            '<html><head><title>Craig Brothers</title><link rel="canonical" href="https://www.craigbrothers.com/"></head><body>Craig Brothers</body></html>',
+            {
+              status: 200,
+              headers: { 'Content-Type': 'text/html' },
+            }
+          );
         },
       },
     };
@@ -251,10 +272,21 @@ describe('6. Worker Middleware Functional Simulation', () => {
     assert.equal(healthBody.status, 'ok');
     assert.equal(healthBody.environment, 'staging');
 
-    // 2. Legacy route redirect /freya -> /#freya
-    const legacyRes = await worker.fetch(new Request('https://www.craigbrothers.com/freya'), mockEnv, mockCtx);
-    assert.equal(legacyRes.status, 301);
-    assert.equal(legacyRes.headers.get('Location'), 'https://www.craigbrothers.com/#freya');
+    // 2. Clean section route /freya returns 200 OK with injected canonical and title
+    const sectionRes = await worker.fetch(new Request('https://www.craigbrothers.com/freya'), mockEnv, mockCtx);
+    assert.equal(sectionRes.status, 200);
+    const sectionHtml = await sectionRes.text();
+    assert.ok(sectionHtml.includes('<link rel="canonical" href="https://www.craigbrothers.com/freya">'));
+    assert.ok(sectionHtml.includes('<title>Freya - Our Shooting Star | Craig Brothers</title>'));
+
+    // 2b. Legacy /home and trailing-slash /freya/ redirect 301
+    const homeRes = await worker.fetch(new Request('https://www.craigbrothers.com/home'), mockEnv, mockCtx);
+    assert.equal(homeRes.status, 301);
+    assert.equal(homeRes.headers.get('Location'), 'https://www.craigbrothers.com/');
+
+    const slashRes = await worker.fetch(new Request('https://www.craigbrothers.com/freya/'), mockEnv, mockCtx);
+    assert.equal(slashRes.status, 301);
+    assert.equal(slashRes.headers.get('Location'), 'https://www.craigbrothers.com/freya');
 
     // 3. Apex redirect craigbrothers.com -> www.craigbrothers.com
     const apexRes = await worker.fetch(new Request('https://craigbrothers.com/'), mockEnv, mockCtx);

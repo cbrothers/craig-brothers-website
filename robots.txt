@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /cdn-cgi/
+Disallow: /__health
 
 Sitemap: https://www.craigbrothers.com/sitemap.xml
