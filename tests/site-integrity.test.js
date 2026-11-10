@@ -212,6 +212,8 @@ describe('5. Cloudflare Worker Edge Middleware, Redirects & GA4 Tag', () => {
   it('configures GA4 Measurement ID G-W8W15JLP5W directly in head without consent banner', () => {
     assert.ok(indexHtml.includes('https://www.googletagmanager.com/gtag/js?id=G-W8W15JLP5W'), 'Missing gtag.js script for G-W8W15JLP5W');
     assert.ok(indexHtml.includes("gtag('config', 'G-W8W15JLP5W')"), 'Missing gtag config call for G-W8W15JLP5W');
+    assert.ok(notFoundHtml.includes('https://www.googletagmanager.com/gtag/js?id=G-W8W15JLP5W'), 'Missing gtag.js script in 404.html');
+    assert.ok(notFoundHtml.includes("gtag('config', 'G-W8W15JLP5W')"), 'Missing gtag config call in 404.html');
     assert.equal(indexHtml.includes('cookieBanner'), false, 'Should not include cookie consent banner');
   });
 
