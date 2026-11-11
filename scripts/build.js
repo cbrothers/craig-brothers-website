@@ -13,6 +13,7 @@ const FILES_TO_COPY = [
   'apple-touch-icon.png',
   'robots.txt',
   'sitemap.xml',
+  'pgp-key.txt',
   '_headers',
   '_redirects',
 ];

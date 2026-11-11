@@ -50,9 +50,9 @@ const SECTION_SEO_ROUTES = new Map([
     '/music',
     {
       sectionId: 'music',
-      title: 'Music & Studio | Craig Brothers - Artificial Integrity, The Silent Whistle & More',
+      title: 'Music & Multimedia | Craig Brothers - Artificial Integrity, The Silent Whistle & More',
       description:
-        'Human songwriting and AI-assisted sonic architecture by Craig Brothers: Artificial Integrity, The Silent Whistle, Copperhead Blues, and Brothers Blues.',
+        'Human songwriting and AI-assisted music and multimedia production by Craig Brothers: Artificial Integrity, The Silent Whistle, Copperhead Blues, and Brothers Blues.',
       image: 'https://www.craigbrothers.com/images/me-02.jpg',
       imageAlt: 'Craig Brothers music and studio projects',
     },

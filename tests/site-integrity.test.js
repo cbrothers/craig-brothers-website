@@ -23,6 +23,7 @@ describe('1. Required Project Files & Build Artifacts', () => {
     'apple-touch-icon.png',
     'robots.txt',
     'sitemap.xml',
+    'pgp-key.txt',
     '_headers',
     '_redirects',
     'wrangler.jsonc',
