@@ -379,6 +379,40 @@ function applySecurityHeaders(response, hostname, extraHeaders = {}) {
 async function handleRequest(request, env, ctx) {
   const url = new URL(request.url);
   const hostname = url.hostname.toLowerCase();
+  const lowerPath = url.pathname.toLowerCase();
+
+  // Serve RFC 9116 security.txt directly at the edge
+  if (lowerPath === '/.well-known/security.txt' || lowerPath === '/security.txt') {
+    const securityTxt = [
+      'Contact: mailto:craig@craigbrothers.com',
+      'Encryption: https://www.craigbrothers.com/pgp-key.txt',
+      'Canonical: https://www.craigbrothers.com/.well-known/security.txt',
+      'Preferred-Languages: en',
+      'Expires: 2027-11-11T00:00:00.000Z',
+      '',
+    ].join('\n');
+    return applySecurityHeaders(
+      new Response(securityTxt, {
+        status: 200,
+        headers: {
+          'Content-Type': 'text/plain; charset=utf-8',
+          'Cache-Control': 'public, max-age=86400',
+        },
+      }),
+      hostname
+    );
+  }
+
+  // Serve Web Key Directory (WKD) direct & advanced requests on both craigbrothers.com and www.craigbrothers.com without redirecting
+  if (lowerPath.startsWith('/.well-known/openpgpkey/')) {
+    const wkdResp = await env.ASSETS.fetch(request);
+    const isPolicy = lowerPath.endsWith('/policy');
+    return applySecurityHeaders(wkdResp, hostname, {
+      'Content-Type': isPolicy ? 'text/plain; charset=utf-8' : 'application/octet-stream',
+      'Access-Control-Allow-Origin': '*',
+      'Cache-Control': 'public, max-age=86400',
+    });
+  }
 
   // Canonical redirect: craigbrothers.com -> www.craigbrothers.com
   if (hostname === APEX_HOSTNAME) {

@@ -24,6 +24,11 @@ describe('1. Required Project Files & Build Artifacts', () => {
     'robots.txt',
     'sitemap.xml',
     'pgp-key.txt',
+    '.well-known/security.txt',
+    '.well-known/openpgpkey/policy',
+    '.well-known/openpgpkey/hu/a144to849imkhr1juqo7mikormp6errq',
+    '.well-known/openpgpkey/craigbrothers.com/policy',
+    '.well-known/openpgpkey/craigbrothers.com/hu/a144to849imkhr1juqo7mikormp6errq',
     '_headers',
     '_redirects',
     'wrangler.jsonc',
@@ -37,7 +42,9 @@ describe('1. Required Project Files & Build Artifacts', () => {
     it(`has required file ${relPath}`, () => {
       const full = path.join(ROOT, relPath);
       assert.equal(fs.existsSync(full), true, `Missing ${relPath}`);
-      assert.ok(fs.statSync(full).size > 0, `${relPath} is empty`);
+      if (!relPath.endsWith('/policy')) {
+        assert.ok(fs.statSync(full).size > 0, `${relPath} is empty`);
+      }
     });
   }
 });
@@ -295,6 +302,21 @@ describe('6. Worker Middleware Functional Simulation', () => {
     const apexRes = await worker.fetch(new Request('https://craigbrothers.com/'), mockEnv, mockCtx);
     assert.equal(apexRes.status, 301);
     assert.equal(apexRes.headers.get('Location'), 'https://www.craigbrothers.com/');
+
+    // 3b. security.txt and WKD on apex domain serve 200 OK without redirecting
+    const secTxtRes = await worker.fetch(new Request('https://www.craigbrothers.com/.well-known/security.txt'), mockEnv, mockCtx);
+    assert.equal(secTxtRes.status, 200);
+    const secTxtBody = await secTxtRes.text();
+    assert.ok(secTxtBody.includes('Encryption: https://www.craigbrothers.com/pgp-key.txt'));
+
+    const wkdRes = await worker.fetch(
+      new Request('https://craigbrothers.com/.well-known/openpgpkey/hu/a144to849imkhr1juqo7mikormp6errq'),
+      mockEnv,
+      mockCtx
+    );
+    assert.equal(wkdRes.status, 200);
+    assert.equal(wkdRes.headers.get('Content-Type'), 'application/octet-stream');
+    assert.equal(wkdRes.headers.get('Access-Control-Allow-Origin'), '*');
 
     // 4. Exploit probe triggers 403 and bans IP
     const probeReq = new Request('https://www.craigbrothers.com/.env', {

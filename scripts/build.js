@@ -18,7 +18,7 @@ const FILES_TO_COPY = [
   '_redirects',
 ];
 
-const DIRS_TO_COPY = ['images', 'media'];
+const DIRS_TO_COPY = ['images', 'media', '.well-known'];
 const RETIRED_IMAGES = [
   'gp-karry-dressage-autumn-2026.jpg',
   'logo-streetmail.png',
