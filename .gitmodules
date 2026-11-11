@@ -1,0 +1,3 @@
+[submodule "functions/honeypot"]
+	path = functions/honeypot
+	url = https://github.com/cbrothers/cloudflare-edge-honeypot.git
