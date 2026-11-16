@@ -326,12 +326,6 @@ async function handleRequest(request, env = {}, _ctx = {}) {
     });
   }
 
-  // Canonical redirect: craigbrothers.com -> www.craigbrothers.com
-  if (hostname === APEX_HOSTNAME) {
-    url.hostname = WWW_HOSTNAME;
-    return Response.redirect(url.toString(), 301);
-  }
-
   // Health check endpoint for automated deployment verification and uptime monitors
   if (url.pathname === '/__health') {
     const healthPayload = JSON.stringify({
@@ -367,7 +361,7 @@ async function handleRequest(request, env = {}, _ctx = {}) {
     );
   }
 
-  // Evaluate shared cloudflare-edge-honeypot (v1.1.0)
+  // Evaluate shared cloudflare-edge-honeypot BEFORE canonical redirect so probes on apex are banned immediately
   const { blockedResponse, setCookieHeader } = await evaluateHoneypotRequest({
     request,
     url,
@@ -379,6 +373,12 @@ async function handleRequest(request, env = {}, _ctx = {}) {
 
   if (blockedResponse) {
     return applySecurityHeaders(blockedResponse, hostname);
+  }
+
+  // Canonical redirect: craigbrothers.com -> www.craigbrothers.com
+  if (hostname === APEX_HOSTNAME) {
+    url.hostname = WWW_HOSTNAME;
+    return Response.redirect(url.toString(), 301);
   }
 
   const extraHeaders = setCookieHeader
